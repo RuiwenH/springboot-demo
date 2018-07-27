@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.reven.model.Demo;
+import com.reven.model.entity.Demo;
 import com.reven.service.DemoService;
 import com.reven.controller.common.ResResult;
 import com.github.pagehelper.PageHelper;

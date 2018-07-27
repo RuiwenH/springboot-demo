@@ -1,7 +1,6 @@
 package generator;
 
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
 import java.util.Set;
 
@@ -21,18 +20,7 @@ public class MyCommentGenerator extends MapperCommentGenerator {
 
 	private String endingDelimiter = "`";
 	private boolean forceAnnotation;
-	private Properties properties;
-	private boolean suppressDate;
-	private boolean suppressAllComments;
-	private boolean addRemarkComments;
-	private SimpleDateFormat dateFormat;
 
-	public MyCommentGenerator() {
-		this.properties = new Properties();
-		this.suppressDate = false;
-		this.suppressAllComments = false;
-		this.addRemarkComments = false;
-	}
 
 	@Override
 	public void addConfigurationProperties(Properties properties) {
@@ -97,11 +85,11 @@ public class MyCommentGenerator extends MapperCommentGenerator {
 
 			field.addAnnotation(new StringBuilder().append("@Column(name = \"").append(getDelimiterName(column))
 					.append("\")").toString());
-		} else if ((StringUtility.stringHasValue(this.beginningDelimiter))
-				|| (StringUtility.stringHasValue(this.endingDelimiter))) {
-			System.out.println("2column:" + column);
-			field.addAnnotation(
-					new StringBuilder().append("@Column(name = \"").append(column).append("\")").toString());
+//		} else if ((StringUtility.stringHasValue(this.beginningDelimiter))
+//				|| (StringUtility.stringHasValue(this.endingDelimiter))) {
+//			System.out.println("2column:" + column);
+//			field.addAnnotation(
+//					new StringBuilder().append("@Column(name = \"").append(column).append("\")").toString());
 		} else if (this.forceAnnotation) {
 			System.out.println("3column:" + column);
 			field.addAnnotation(

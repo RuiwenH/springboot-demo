@@ -1,7 +1,7 @@
 package com.reven.service.impl;
 
 import com.reven.dao.DemoMapper;
-import com.reven.model.Demo;
+import com.reven.model.entity.Demo;
 import com.reven.service.DemoService;
 import com.reven.core.AbstractService;
 import org.springframework.stereotype.Service;

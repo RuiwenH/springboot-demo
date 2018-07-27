@@ -1,5 +1,5 @@
 package com.reven.service;
-import com.reven.model.Demo;
+import com.reven.model.entity.Demo;
 import com.reven.core.IBaseService;
 
 

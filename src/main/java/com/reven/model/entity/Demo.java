@@ -1,35 +1,31 @@
-package com.reven.model;
+package com.reven.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "t_demo")
-public class Demo implements Serializable {
+public class Demo extends BaseEntity implements Serializable {
     /**
      * @Fields id 自增主键id
      */
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     /**
      * @Fields name  名称
      */
-    @Column(name = "name")
     private String name;
 
     /**
      * @Fields date 数据日期
      */
-    @Column(name = "date")
     private Date date;
 
     /**
      * @Fields timestamp 更新记录时刷新当前时间戳记时
      */
-    @Column(name = "timestamp")
     private Date timestamp;
 
     /**
@@ -37,6 +33,9 @@ public class Demo implements Serializable {
      */
     @Column(name = "`KEY`")
     private String key;
+
+    @Column(name = "`ac dd`")
+    private String acDd;
 
     private static final long serialVersionUID = 1L;
 
@@ -53,7 +52,7 @@ public class Demo implements Serializable {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public Date getDate() {
@@ -77,7 +76,15 @@ public class Demo implements Serializable {
     }
 
     public void setKey(String key) {
-        this.key = key;
+        this.key = key == null ? null : key.trim();
+    }
+
+    public String getAcDd() {
+        return acDd;
+    }
+
+    public void setAcDd(String acDd) {
+        this.acDd = acDd == null ? null : acDd.trim();
     }
 
     @Override
@@ -91,6 +98,7 @@ public class Demo implements Serializable {
         sb.append(", date=").append(date);
         sb.append(", timestamp=").append(timestamp);
         sb.append(", key=").append(key);
+        sb.append(", acDd=").append(acDd);
         sb.append("]");
         return sb.toString();
     }

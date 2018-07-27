@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ${basePackage}.model.${modelNameUpperCamel};
+import ${basePackage}.model.entity.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
 import ${basePackage}.controller.common.ResResult;
 import com.github.pagehelper.PageHelper;

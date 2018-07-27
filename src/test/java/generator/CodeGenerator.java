@@ -58,7 +58,7 @@ public class CodeGenerator {
 	public static void main(String[] args) {
 		// genCode("输入表名");
 		genCodeByCustomModelName("t_demo", "Demo");
-		genCodeByCustomModelName("t_demo_copy", "DemoCopy");
+//		genCodeByCustomModelName("t_demo_copy", "DemoCopy");
 		
 	}
 
@@ -138,6 +138,9 @@ public class CodeGenerator {
 		JavaModelGeneratorConfiguration javaModelGeneratorConfiguration = new JavaModelGeneratorConfiguration();
 		javaModelGeneratorConfiguration.setTargetProject(PROJECT_PATH + JAVA_PATH);
 		javaModelGeneratorConfiguration.setTargetPackage(ProjectConstant.MODEL_PACKAGE);
+		javaModelGeneratorConfiguration.addProperty(PropertyRegistry.MODEL_GENERATOR_TRIM_STRINGS, "true");
+		javaModelGeneratorConfiguration.addProperty(PropertyRegistry.ANY_ROOT_CLASS,
+				ProjectConstant.MODEL_PACKAGE + ".BaseEntity");
 		context.setJavaModelGeneratorConfiguration(javaModelGeneratorConfiguration);
 
 		SqlMapGeneratorConfiguration sqlMapGeneratorConfiguration = new SqlMapGeneratorConfiguration();
