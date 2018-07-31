@@ -1,6 +1,9 @@
 # SpringBoot Demo
 SpringBoot 常用功能演示
 
+## 目录结构规范
+* 参考  https://blog.csdn.net/ubuntu64fan/article/details/80555915
+
 ## 数据源配置——生产环境配置
 
 ## 多数据源配置
@@ -45,4 +48,9 @@ SpringBoot 常用功能演示
 
 
 ## 接口签名认证
+
+## springmvc 导出excel
+* 模板导出Jxls
+* 参考文档 https://blog.csdn.net/zjl103/article/details/49666101
+https://www.cnblogs.com/foxlee1024/p/7616987.html
 

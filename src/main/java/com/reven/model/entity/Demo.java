@@ -38,7 +38,7 @@ public class Demo extends BaseEntity implements Serializable {
     private String acDd;
 
     private static final long serialVersionUID = 1L;
-
+    
     public Integer getId() {
         return id;
     }
