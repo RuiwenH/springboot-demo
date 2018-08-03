@@ -49,8 +49,17 @@ SpringBoot 常用功能演示
 
 ## 接口签名认证
 
-## springmvc 导出excel
-* 模板导出Jxls
-* 参考文档 https://blog.csdn.net/zjl103/article/details/49666101
-https://www.cnblogs.com/foxlee1024/p/7616987.html
+## springmvc 基于模板导出excel
+* 使用jxls通过模板导出excel
+* 参考文档 [JXLS 2.4.0系列教程（一）简单使用](https://www.cnblogs.com/foxlee1024/p/7616987.html)
+* 参考文档 [JXLS 2.4.0系列教程（二）——循环导出一个链表的数据](http://www.cnblogs.com/foxlee1024/p/7617120.html)
+作者还提供了其他更复杂的教程，可以通过文章的下一篇查阅，例如分Sheet、嵌套循环、统计、一些bug等
+* 参考文档 [springmvc导出](https://blog.csdn.net/zjl103/article/details/49666101)
+## springmvc 无模板导出excel
+* 场景：数据模板多、导出的数据统一的格式。例如导出10个表的数据。
 
+## @Scheduled 定时任务
+
+## echarts入门案例
+* [参考文档]()
+* [参考文档](https://blog.csdn.net/qq_35641192/article/details/80616099)

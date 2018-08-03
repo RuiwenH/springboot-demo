@@ -1,5 +1,6 @@
 package com.reven.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -65,14 +67,35 @@ public class DemoController {
 	@RequestMapping(value = "/exportExcel")
 	public ModelAndView export() {
 		Map<String, Object> model = new HashMap<>();
-		model.put("testkey", "list数据之外的一些值");
-		model.put("num", 8);
+		model.put("name", "Reven001");
+		model.put("age", 18);
 		// queryUser()为数据获取的方法
 		List<Demo> list = demoService.findAll();
-		if(list==null ||list.size()==0) {
-			model.put("emptyMsg", "您导出的数据为空！");
+		if (list == null || list.size() == 0) {
+//			model.put("emptyMsg", "您导出的数据为空！");
+			//list为空，会报错
+			model.put("demoList", new ArrayList<Demo>(0));
+		} else {
+			model.put("demoList", list);
 		}
-		model.put("demoList", list);
+		return new ModelAndView(new JxlsExcelView("static/excel/t_template.xls", "demo导出"), model);
+	}
+	
+	@RequestMapping(value = "/echartData")
+	@ResponseBody
+	public ModelAndView echart() {
+		Map<String, Object> model = new HashMap<>();
+		model.put("name", "Reven001");
+		model.put("age", 18);
+		// queryUser()为数据获取的方法
+		List<Demo> list = demoService.findAll();
+		if (list == null || list.size() == 0) {
+//			model.put("emptyMsg", "您导出的数据为空！");
+			//list为空，会报错
+			model.put("demoList", new ArrayList<Demo>(0));
+		} else {
+			model.put("demoList", list);
+		}
 		return new ModelAndView(new JxlsExcelView("static/excel/t_template.xls", "demo导出"), model);
 	}
 }
