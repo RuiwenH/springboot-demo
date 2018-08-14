@@ -34,5 +34,4 @@ spring.datasource:
 mybatis:
   configuration:
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  #typeAliasesPackage: com.aspire.cmop.model
   mapperLocations: classpath:mapper/*Mapper.xml,classpath*:sqlmap/*Mapper.xml
