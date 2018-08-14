@@ -118,7 +118,7 @@ dump(){
         mkdir $DATE_DIR
     fi
     
-    echo  "Dumping the $SERVER_NAME ..."
+    echo  "Dumping the $SERVER_NAME ...\c"
     
     PIDS=`ps -ef | grep java | grep $JAR_FILE |awk '{print $2}'`
     for PID in $PIDS ; do
