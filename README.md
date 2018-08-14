@@ -13,6 +13,7 @@ SpringBoot 常用功能演示
 ## SpringBoot-tomcat配置优化
 
 ## SpringBoot启动脚本——JVM优化
+* 功能：
 * 参考文档 [url](https://blog.csdn.net/vakinge/article/details/78706679)
 * 参考文档 [url](https://github.com/junbaor/shell_script/blob/master/spring-boot.sh)
 
