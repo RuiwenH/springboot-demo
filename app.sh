@@ -118,55 +118,55 @@ dump(){
         mkdir $DATE_DIR
     fi
     
-    echo  "Dumping the $SERVER_NAME ..."
+    echo  "Dumping the $SERVER_NAME ...\c"
     for PID in $PIDS ; do
         jstack $PID > $DATE_DIR/jstack-$PID.dump 2>&1
-        echo  "."
+        echo  ".\c"
         jinfo $PID > $DATE_DIR/jinfo-$PID.dump 2>&1
-        echo  "."
+        echo  ".\c"
         jstat -gcutil $PID > $DATE_DIR/jstat-gcutil-$PID.dump 2>&1
-        echo  "."
+        echo  ".\c"
         jstat -gccapacity $PID > $DATE_DIR/jstat-gccapacity-$PID.dump 2>&1
-        echo  "."
+        echo  ".\c"
         jmap $PID > $DATE_DIR/jmap-$PID.dump 2>&1
-        echo  "."
+        echo  ".\c"
         jmap -heap $PID > $DATE_DIR/jmap-heap-$PID.dump 2>&1
-        echo  "."
+        echo  ".\c"
         jmap -histo $PID > $DATE_DIR/jmap-histo-$PID.dump 2>&1
-        echo  "."
+        echo  ".\c"
         if [ -r /usr/sbin/lsof ]; then
         /usr/sbin/lsof -p $PID > $DATE_DIR/lsof-$PID.dump
-        echo  "."
+        echo  ".\c"
         fi
     done
     
     if [ -r /bin/netstat ]; then
     /bin/netstat -an > $DATE_DIR/netstat.dump 2>&1
-    echo  "."
+    echo  ".\c"
     fi
     if [ -r /usr/bin/iostat ]; then
     /usr/bin/iostat > $DATE_DIR/iostat.dump 2>&1
-    echo  "."
+    echo  ".\c"
     fi
     if [ -r /usr/bin/mpstat ]; then
     /usr/bin/mpstat > $DATE_DIR/mpstat.dump 2>&1
-    echo  "."
+    echo  ".\c"
     fi
     if [ -r /usr/bin/vmstat ]; then
     /usr/bin/vmstat > $DATE_DIR/vmstat.dump 2>&1
-    echo  "."
+    echo  ".\c"
     fi
     if [ -r /usr/bin/free ]; then
     /usr/bin/free -t > $DATE_DIR/free.dump 2>&1
-    echo  "."
+    echo  ".\c"
     fi
     if [ -r /usr/bin/sar ]; then
     /usr/bin/sar > $DATE_DIR/sar.dump 2>&1
-    echo  "."
+    echo  ".\c"
     fi
     if [ -r /usr/bin/uptime ]; then
     /usr/bin/uptime > $DATE_DIR/uptime.dump 2>&1
-    echo  "."
+    echo  ".\c"
     fi
     
     echo "OK!"
