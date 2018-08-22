@@ -11,6 +11,7 @@ public class SpringBootDemoApplicationTests {
 
 	@Test
 	public void contextLoads() {
+	    System.out.println("************运行单元测试************");
 	}
 
 }

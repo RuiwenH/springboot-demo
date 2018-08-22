@@ -1,15 +1,30 @@
 server.port: 80
 
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    dao: info
+    root: info #总的日志解绑
+    com.reven.controller: info #指定包的日志级别
+    org.mybatis: info
+
 # 定位模板的目录
 spring.mvc.view.prefix: classpath:/templates/
 # 给返回的页面添加后缀名
 spring.mvc.view.suffix: .html
 
-spring.datasource:
-  driver-class-name: com.mysql.jdbc.Driver
-  url: jdbc:mysql://localhost:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+#数据库配置
+deploy.datasource:
+  ip: localhost
+  dbname: test
   username: root
   password: 123456
+
+spring.datasource:
+  driver-class-name: com.mysql.jdbc.Driver
+  url: jdbc:mysql://${deploy.datasource.ip}:3306/${deploy.datasource.dbname}?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+  username: ${deploy.datasource.username}
+  password: ${deploy.datasource.password}
   type: com.alibaba.druid.pool.DruidDataSource
   initialSize: 5
   minIdle: 5

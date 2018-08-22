@@ -20,7 +20,7 @@ public class GzipPcompress {
 		try {
 			FileInputStream fileInputStream = new FileInputStream(sourcePathAndName);
 			GZIPInputStream Zin = new GZIPInputStream(fileInputStream);
-			this.extractFile(Zin, pressPathAndName);
+			GzipPcompress.extractFile(Zin, pressPathAndName);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

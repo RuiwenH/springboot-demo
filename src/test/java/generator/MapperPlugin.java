@@ -17,11 +17,10 @@ import org.mybatis.generator.config.Context;
 import org.mybatis.generator.internal.util.StringUtility;
 
 import tk.mybatis.mapper.MapperException;
-import tk.mybatis.mapper.generator.MapperCommentGenerator;
 
 public class MapperPlugin extends PluginAdapter
 {
-  private Set<String> mappers = new HashSet();
+  private Set<String> mappers = new HashSet<>();
   private boolean caseSensitive = false;
 
   private String beginningDelimiter = "";

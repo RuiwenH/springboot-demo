@@ -262,7 +262,8 @@ public class CodeGenerator {
 		return cfg;
 	}
 
-	private static String tableNameConvertLowerCamel(String tableName) {
+	@SuppressWarnings("unused")
+    private static String tableNameConvertLowerCamel(String tableName) {
 		return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, tableName.toLowerCase());
 	}
 

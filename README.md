@@ -1,5 +1,5 @@
 # SpringBoot Demo
-SpringBoot 常用功能演示
+SpringBoot 常用功能演示及使用规范，最佳实践。
 
 ## 目录结构规范
 * 参考  https://blog.csdn.net/ubuntu64fan/article/details/80555915
@@ -11,6 +11,14 @@ SpringBoot 常用功能演示
 ## 动态数据源配置
 
 ## SpringBoot-tomcat配置优化
+
+## maven构建
+* 功能：install忽略单元测试、指定打包的名字、指定编译的java版本和编码格式
+* 功能：项目打包时，成品输出路径 ：${env.RELEASE_HOME}，${env.RELEASE_HOME}是maven执行时的参数
+* 功能：打包时，将本地引用的jar一起打成jar（有些第三方jar，担心其变更代码不修改版本，将其jar放入工程lib目录）
+* 功能：打包时，排除一下resources文件
+* 功能：将指定文件（一般是部署时的配置文件和shell脚本）复制到成品输出路径 ：${env.RELEASE_HOME}
+* demo: 详见pom文件
 
 ## SpringBoot启动脚本——JVM优化
 * 功能：
@@ -86,3 +94,11 @@ https://blog.csdn.net/zhaoyahui_666/article/details/78835128
 * [参考文档](https://blog.csdn.net/qq_35641192/article/details/80616099)
 
 ##  Junit单元测试
+
+## springBoot的监控和管理
+* [spring-boot-actuator参考文档](https://blog.csdn.net/l_sail/article/details/70495601)
+
+## SSI 如何找到源文件
+https://www.cnblogs.com/ITGirl00/archive/2013/02/23/SSI.html
+https://www.cnblogs.com/NeverCtrl-C/p/8191920.html
+https://blog.csdn.net/fgsgsgfgsg/article/details/46860049
