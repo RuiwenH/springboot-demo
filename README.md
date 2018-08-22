@@ -14,14 +14,18 @@ SpringBoot 常用功能演示及使用规范，最佳实践。
 
 ## maven构建
 * 功能：install忽略单元测试、指定打包的名字、指定编译的java版本和编码格式
-* 功能：项目打包时，成品输出路径 ：${env.RELEASE_HOME}，${env.RELEASE_HOME}是maven执行时的参数
+* 功能：项目打包时，build输出路径 ：${env.RELEASE_HOME}，${env.RELEASE_HOME}是maven执行时的参数
 * 功能：打包时，将本地引用的jar一起打成jar（有些第三方jar，担心其变更代码不修改版本，将其jar放入工程lib目录）
-* 功能：打包时，排除一下resources文件
-* 功能：将指定文件（一般是部署时的配置文件和shell脚本）复制到成品输出路径 ：${env.RELEASE_HOME}
+* 功能：打包时，排除部分resources文件
+* 功能：将指定文件（一般是部署时的配置文件和shell脚本）复制到输出路径 ：${env.RELEASE_HOME}
 * demo: 详见pom文件
 
-## SpringBoot启动脚本——JVM优化
-* 功能：
+## SpringBoot启动脚本
+* 功能：设置JVM参数（指定程序运行名称、时区、内存大小、GC回收器设置、gc日志文件）
+* 功能：指定配置文件的环境变量
+* 功能：start 启动时检查程序是否已经启动
+* 功能：stop 停止程序、stop之前会先dump
+* 功能：dump系统状态和jvm信息到文件中
 * 参考文档 [url](https://blog.csdn.net/vakinge/article/details/78706679)
 * 参考文档 [url](https://github.com/junbaor/shell_script/blob/master/spring-boot.sh)
 

@@ -20,7 +20,7 @@
 	</parent>
 
 	<properties>
-		<!-- 项目打包时，成品输出路径 ：${env.RELEASE_HOME}，${env.RELEASE_HOME}是maven执行时的参数 -->
+		<!-- 项目打包时，build输出路径 ：${env.RELEASE_HOME}，${env.RELEASE_HOME}是maven执行时的参数 -->
 		<!-- <project.outputDirectory>${env.RELEASE_HOME}</project.outputDirectory> -->
 		<project.outputDirectory>output</project.outputDirectory>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
