@@ -20,7 +20,7 @@
 	</parent>
 
 	<properties>
-		<!-- 项目打包时，成品输出路径 ：${env.RELEASE_HOME}，${env.RELEASE_HOME}是maven执行时的参数 -->
+		<!-- 项目打包时，build输出路径 ：${env.RELEASE_HOME}，${env.RELEASE_HOME}是maven执行时的参数 -->
 		<!-- <project.outputDirectory>${env.RELEASE_HOME}</project.outputDirectory> -->
 		<project.outputDirectory>output</project.outputDirectory>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,6 +29,12 @@
 	</properties>
 
 	<dependencies>
+	    <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>1.5.9.RELEASE</version>
+            <optional>true</optional>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
@@ -99,13 +105,16 @@
 			<version>1.2.4</version>
 		</dependency>
 
+        <!-- 哪个更好？ -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.47</version>
 		</dependency>
-
-
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.mybatis.generator</groupId>

@@ -4,13 +4,13 @@
 #2、默认logs目录——可否另外指定？
 #3、JMX监控——待实现，需要启用第二参数来指定
 #4、设置JVM参数（指定程序运行名称、时区、内存大小、GC回收器设置、gc日志文件）
-#5、 指定配置文件的环境变量
+#5、指定配置文件的环境变量
 #6、start 启动时检查程序是否已经启动
-#7、stop 停止程序、stop之前会先dump。带完善：kill失败检查，然后用kill -9, 有可能存在多个server
+#7、stop 停止程序、stop之前会先dump。待完善：kill失败检查，然后用kill -9, 有可能存在多个server
 #8、status 查看程序是否运行
 #9、restart 重启
 #10、dump dump系统状态和jvm信息到文件中
-#11、 配置文件使用哪种方式更好？
+#11、配置文件使用哪种方式更好？
 #12、默认的jvm配置
 #待补充端口占用检查
 
@@ -20,11 +20,12 @@
 #2、启动示例 ./app.sh start 
 #3、重启示例 ./app.sh restart 
 #4、停止示例 ./app.sh stop 
+#5、参数$0 用于指定
 
 
 
 
-#ENV=dev
+ENV=$1
 RUNNING_USER=cmop
 ADATE=`date +%Y%m%d%H%M%S`
 SERVER_NAME=springboot-demo

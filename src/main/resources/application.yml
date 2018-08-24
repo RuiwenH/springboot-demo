@@ -3,10 +3,11 @@ server.port: 80
 logging:
   config: classpath:logback-spring.xml
   level:
-    dao: info
-    root: info #总的日志解绑
-    com.reven.controller: info #指定包的日志级别
-    org.mybatis: info
+    root: info #总的日志级别,会覆盖logback中的root级别
+    #com.reven.controller: info #指定包的日志级别
+    
+# 控制台彩色日志，需要插件支持
+spring.output.ansi.enabled: ALWAYS
 
 # 定位模板的目录
 spring.mvc.view.prefix: classpath:/templates/
@@ -47,6 +48,6 @@ spring.datasource:
 
   #公共配置与profiles选择无关
 mybatis:
-  configuration:
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# mybatis日志打印设置
+  configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapperLocations: classpath:mapper/*Mapper.xml,classpath*:sqlmap/*Mapper.xml
