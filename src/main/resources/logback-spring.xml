@@ -7,7 +7,7 @@
 <!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
 <configuration  scan="true" scanPeriod="10 seconds">
     <contextName>springboot-demo</contextName>
-    <property name="log.file。prefix" value="springboot_demo" />
+    <property name="log.file.prefix" value="springboot_demo" />
     <!--定义日志文件的存储地址,这里配置为相对路径会--> 
     <property name="log.path" value="logs" />
 
@@ -39,7 +39,7 @@
     <!-- 2 level为 INFO级别以上的 日志，时间滚动输出  -->
     <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文档的路径及文档名 -->
-        <file>${log.path}/${log.file。prefix}_info.log</file>
+        <file>${log.path}/${log.file.prefix}_info.log</file>
         <!--日志文档输出格式-->
         <encoder>
             <pattern>${file.log.pattern}</pattern>
@@ -48,7 +48,7 @@
         <!-- 日志记录器的滚动策略，按日期，按大小记录  https://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 每天日志归档路径以及格式 -->
-            <fileNamePattern>${log.path}/${log.file。prefix}_info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${log.file.prefix}_info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <!-- 避免单个日志过大，不方便打开或下载等 -->
                 <maxFileSize>50MB</maxFileSize>
@@ -65,7 +65,7 @@
     <!-- 3 level为 ERROR 日志，时间滚动输出  -->
     <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文档的路径及文档名 -->
-        <file>${log.path}/${log.file。prefix}_error.log</file>
+        <file>${log.path}/${log.file.prefix}_error.log</file>
         <!--日志文档输出格式-->
         <encoder>
             <pattern>${file.log.pattern}</pattern>
@@ -73,7 +73,7 @@
         </encoder>
         <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.path}/${log.file。prefix}_error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${log.file.prefix}_error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>50MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -115,17 +115,19 @@
         可以包含零个或多个元素，标识这个appender将会添加到这个logger。
     -->
 
-    <!-- 4. 最终的策略 -->
-    <!-- 4.1 开发环境:打印控制台-->
-    <springProfile name="dev">
-        <logger name="com.reven" level="debug"/>
-    </springProfile>
-
     <root level="info">
-        <appender-ref ref="CONSOLE" />
         <appender-ref ref="INFO_FILE" />
         <appender-ref ref="ERROR_FILE" />
     </root>
+    <!-- 4. 最终的策略 -->
+    <!-- 4.1 开发环境:打印控制台-->
+    <springProfile name="dev">
+        <root level="info">
+	        <appender-ref ref="CONSOLE" />
+	        <appender-ref ref="INFO_FILE" />
+	        <appender-ref ref="ERROR_FILE" />
+	    </root>
+    </springProfile>
 
     <!-- 4.2 生产环境:输出到文档 -->
     <springProfile name="pro">

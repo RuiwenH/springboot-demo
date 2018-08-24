@@ -50,7 +50,7 @@ if [ ! -d "$APP_HOME/logs" ];then
 fi
 
 LOG_PATH=$APP_HOME/logs/$SERVER_NAME.out
-GC_LOG_PATH=$APP_HOME/logs/gc-$SERVER_NAME-$ADATE.log
+GC_LOG_PATH=$APP_HOME/logs/gclog/gc-$SERVER_NAME-$ADATE.log
 #JMX监控需用到
 JMX="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1091 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
 #JVM参数
@@ -101,6 +101,13 @@ stop(){
       dump
       echo "$SERVER_NAME stop..."
       kill $pid
+      
+      sleep 5s
+      checkpid
+      if [  -n "$pid" ]; then
+        echo "$SERVER_NAME stop by kill -9 "
+        kill -9 $pid
+      fi
     fi 
 }
 

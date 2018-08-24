@@ -12,6 +12,7 @@
 #10、dump dump系统状态和jvm信息到文件中
 #11、配置文件使用哪种方式更好？
 #12、默认的jvm配置
+#13、JMX支持——待实现
 #待补充端口占用检查
 
 
@@ -29,8 +30,9 @@ ENV=$1
 RUNNING_USER=cmop
 ADATE=`date +%Y%m%d%H%M%S`
 SERVER_NAME=springboot-demo
-
 APP_HOME=`pwd`
+#项目中日志地址
+LOG_PATH=$APP_HOME/logs/springboot_demo_info.log
 
 dirname $0|grep "^/" >/dev/null
 if [ $? -eq 0 ];then
@@ -45,12 +47,14 @@ else
     fi
 fi
 
-if [ ! -d "$APP_HOME/logs" ];then
-  mkdir $APP_HOME/logs
+if [ ! -d "$APP_HOME/logs/gclog" ];then
+  mkdir -p $APP_HOME/logs/gclog
 fi
 
-LOG_PATH=$APP_HOME/logs/$SERVER_NAME.out
-GC_LOG_PATH=$APP_HOME/logs/gc-$SERVER_NAME-$ADATE.log
+if [ -z "$LOG_PATH"  ];then
+    LOG_PATH=$APP_HOME/logs/$SERVER_NAME.out
+fi
+GC_LOG_PATH=$APP_HOME/logs/gclog/gc-$SERVER_NAME-$ADATE.log
 #JMX监控需用到
 JMX="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1091 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
 #JVM参数
@@ -65,12 +69,12 @@ start(){
   if [ ! -n "$pid" ]; then
     #JAVA_CMD="nohup java -server -jar $JVM_OPTS $JAR_FILE > $LOG_PATH 2>&1 &"
     #su - $RUNNING_USER -c "$JAVA_CMD"
-    nohup java -server -jar $JVM_OPTS $JAR_FILE --spring.config.location=$APP_HOME/deploy_config/demo_deploy.yml > $LOG_PATH 2>&1 &
+    java -server -jar $JVM_OPTS $JAR_FILE --spring.config.location=$APP_HOME/deploy_config/demo_deploy.yml &
     echo "---------------------------------"
-    echo "启动完成，按CTRL+C退出日志界面即可>>>>>"
+    echo "启动完成，按CTRL+C退出日志界面即可>>>>>---"
     echo "---------------------------------"
-    sleep 3s
-    tail -f $LOG_PATH
+    
+    status
   else
       echo "$SERVER_NAME is runing PID: $pid"   
   fi
@@ -81,10 +85,10 @@ start(){
 status(){
    checkpid
    if [ ! -n "$pid" ]; then
-     echo "$SERVER_NAME not runing"
+     echo "status() $SERVER_NAME not runing"
    else
-     echo "$SERVER_NAME runing PID: $pid"
-      sleep 4s
+     echo "status() $SERVER_NAME runing PID: $pid"
+     sleep 3s
      tail -f $LOG_PATH
    fi 
 }
@@ -101,6 +105,14 @@ stop(){
       dump
       echo "$SERVER_NAME stop..."
       kill $pid
+      echo "sleep 5s... "
+      sleep 5s
+      checkpid
+      echo "checkpid again..."
+      if [  -n "$pid" ]; then
+        echo "$SERVER_NAME stop by kill -9 "
+        kill -9 $pid
+      fi
     fi 
 }
 
@@ -121,7 +133,7 @@ dump(){
         mkdir $DATE_DIR
     fi
     
-    echo  "Dumping the $SERVER_NAME ...\c"
+    echo  "Dumping the $SERVER_NAME ..."
     
     PIDS=`ps -ef | grep java | grep $JAR_FILE |awk '{print $2}'`
     for PID in $PIDS ; do
