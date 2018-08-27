@@ -47,6 +47,10 @@ spring.datasource:
   connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
     
 
+#  定时任务
+job.cron-expression:
+  demo: 0 0/1 * * * *
+  fixedDelay: 5000 #间隔5秒执行一次
 
   #公共配置与profiles选择无关
 mybatis:
