@@ -7,7 +7,7 @@ import com.reven.core.IBaseService;
 
 
 /**
- * Created by CodeGenerator on 2018/07/27.
+ * @author reven
  */
 public interface DemoService extends IBaseService<Demo> {
 

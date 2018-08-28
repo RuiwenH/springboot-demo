@@ -70,7 +70,7 @@ start(){
   
     #JAVA_CMD=" java -server -jar $JVM_OPTS $JAR_FILE > $LOG_PATH 2>&1 &"
     JAVA_CMD="-server $DEBUG_OPTS -jar $JVM_OPTS $JAR_FILE --spring.config.location=$APP_HOME/deploy_config/demo_deploy.yml"
-    if [! -z "$2"  ];then
+    if [ ! -z "$2"  ];then
         JAVA_CMD="$JAVA_CMD DEBUG_OPTS"
     fi
     #su - $RUNNING_USER -c "$JAVA_CMD"

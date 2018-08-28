@@ -6,6 +6,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import tk.mybatis.spring.annotation.MapperScan;
 
+/**
+ * @ClassName:  SpringBootDemoApplication   
+ * @author reven
+ */
 @SpringBootApplication
 @MapperScan("com.reven.dao")
 @EnableScheduling

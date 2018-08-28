@@ -1,5 +1,8 @@
 package com.reven.jvm;
 
+/**
+ * @author reven
+ */
 public class JvmPrintGcTest {
 	public static void main(String[] args) {
 		JvmPrintGcTest.test();

@@ -17,23 +17,26 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * @author reven
+ */
 public class JsonUtil {
 
-    private static final ObjectMapper mapper;
+    private static final ObjectMapper MAPPER;
 
     static {
-        mapper = new ObjectMapper();
-        mapper.setSerializationInclusion(Include.NON_EMPTY);
-        mapper.setDateFormat(new SimpleDateFormat("yyyyMMddHHmmss"));
+        MAPPER = new ObjectMapper();
+        MAPPER.setSerializationInclusion(Include.NON_EMPTY);
+        MAPPER.setDateFormat(new SimpleDateFormat("yyyyMMddHHmmss"));
     }
 
     public static <T> T json2ObjectByTr(String str, TypeReference<T> tr) 
             throws JsonParseException, JsonMappingException, IOException {
-        return mapper.readValue(str, tr);
+        return MAPPER.readValue(str, tr);
     }
 
-    public static String Object2Json(Object obj) throws JsonProcessingException {
-        return mapper.writeValueAsString(obj);
+    public static String object2Json(Object obj) throws JsonProcessingException {
+        return MAPPER.writeValueAsString(obj);
     }
 
     public static Map toMap(String jsonString) {

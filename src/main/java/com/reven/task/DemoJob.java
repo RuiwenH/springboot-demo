@@ -7,6 +7,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author reven
+ */
 @Component
 public class DemoJob {
 
@@ -15,7 +18,7 @@ public class DemoJob {
 //    @Async
     public void cronDemo() throws InterruptedException {
         // 获取当前时间
-//        Thread.sleep(10000);
+        Thread.sleep(10000);
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out
                 .println("cronDemo，当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
@@ -26,7 +29,7 @@ public class DemoJob {
 //  @Async
     public void cronDemo2() throws InterruptedException {
         // 获取当前时间
-//        Thread.sleep(10000);
+        Thread.sleep(10000);
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out
                 .println("cronDemo2，当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));

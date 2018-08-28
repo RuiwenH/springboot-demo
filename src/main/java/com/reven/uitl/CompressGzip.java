@@ -5,14 +5,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.zip.GZIPOutputStream;
 
-public class CompressGZIP {
+/**
+ * @author reven
+ */
+public class CompressGzip {
 
 	 public static final int BUFFER = 1024;
 	    public static final String EXT = ".gz";
 	    public static void main(String[] args) throws Exception {
 	    	String sourcePathAndName = "E:/test/test";
 			String pressPathAndName = "E:/a.gz";
-			CompressGZIP.compress(sourcePathAndName,pressPathAndName);
+			CompressGzip.compress(sourcePathAndName,pressPathAndName);
 		}
 	 /**
      * 文件压缩

@@ -1,7 +1,11 @@
 package com.reven.controller.common;
 
+
 /**
- * 响应码枚举，参考HTTP状态码的语义
+ * @ClassName:  ResResultCode   
+ * @Description: 响应码枚举，参考HTTP状态码的语义
+ * @author reven
+ * @date   2018年8月28日
  */
 public enum ResResultCode {
     /**

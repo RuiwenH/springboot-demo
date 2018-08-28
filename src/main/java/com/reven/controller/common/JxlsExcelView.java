@@ -12,6 +12,9 @@ import org.jxls.common.Context;
 import org.jxls.util.JxlsHelper;
 import org.springframework.web.servlet.view.AbstractView;
 
+/**
+ * @author reven
+ */
 public class JxlsExcelView extends AbstractView {
     private static final String CONTENT_TYPE = "application/vnd.ms-excel";
 

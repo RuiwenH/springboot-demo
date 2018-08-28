@@ -2,7 +2,7 @@ package generator;
 
 
 /**
- * 项目常量
+ * @author reven
  */
 public final class ProjectConstant {
     public static final String BASE_PACKAGE = "com.reven";// 项目基础包名称，根据自己公司的项目修改

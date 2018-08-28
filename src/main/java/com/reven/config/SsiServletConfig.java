@@ -9,8 +9,12 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * @ClassName:  SsiServletConfig   
+ * @author reven
+ */
 @Configuration
-public class SSIServletConfig {
+public class SsiServletConfig {
 
     @Bean
     public ServletRegistrationBean servletRegistrationBean() {

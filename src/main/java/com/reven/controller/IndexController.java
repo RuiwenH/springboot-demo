@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.reven.controller.common.BaseController;
 
+/**
+ * @author reven
+ */
 @Controller
 public class IndexController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(IndexController.class);
@@ -17,12 +20,13 @@ public class IndexController extends BaseController {
     @RequestMapping({ "/index", "/" })
     public String index(Model model) {
         model.addAttribute("hello", "张三" + new Date());
-        String ServerIp = getServerIpAddress();
-        String UserIp = getIpAddress();
-        model.addAttribute("ServerIp", ServerIp);
-        model.addAttribute("UserIp", UserIp);
-        logger.info("ServerIp={}", ServerIp);
-        logger.info("UserIp={}", UserIp);
-        return "index"; // 返回 /templates/index.html页面
+        String serverIp = getServerIpAddress();
+        String userIp = getIpAddress();
+        model.addAttribute("ServerIp", serverIp);
+        model.addAttribute("UserIp", userIp);
+        logger.info("ServerIp={}", serverIp);
+        logger.info("UserIp={}", userIp);
+        // 返回 /templates/index.html页面
+        return "index";
     }
 }

@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
+/**
+ * @author reven
+ */
 @Table(name = "t_demo")
 public class Demo extends BaseEntity implements Serializable {
     /**

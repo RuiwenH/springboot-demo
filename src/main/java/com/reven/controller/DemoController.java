@@ -26,7 +26,8 @@ import com.reven.model.entity.Demo;
 import com.reven.service.DemoService;
 
 /**
- * Created by CodeGenerator on 2018/07/27.
+ * @ClassName:  DemoController   
+ * @author reven
  */
 @RestController
 @RequestMapping("/demo")
@@ -77,13 +78,12 @@ public class DemoController extends BaseController {
 
     @RequestMapping(value = "/exportExcel")
     public ModelAndView export() {
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = new HashMap<>(4);
         model.put("name", "Reven001");
         model.put("age", 18);
         // queryUser()为数据获取的方法
         List<Demo> list = demoService.findAll();
         if (list == null || list.size() == 0) {
-//			model.put("emptyMsg", "您导出的数据为空！");
             // list为空，会报错
             model.put("demoList", new ArrayList<Demo>(0));
         } else {
@@ -95,13 +95,12 @@ public class DemoController extends BaseController {
     @RequestMapping(value = "/echartData")
     @ResponseBody
     public ModelAndView echart() {
-        Map<String, Object> model = new HashMap<>();
+        Map<String, Object> model = new HashMap<>(4);
         model.put("name", "Reven001");
         model.put("age", 18);
         // queryUser()为数据获取的方法
         List<Demo> list = demoService.findAll();
         if (list == null || list.size() == 0) {
-//			model.put("emptyMsg", "您导出的数据为空！");
             // list为空，会报错
             model.put("demoList", new ArrayList<Demo>(0));
         } else {

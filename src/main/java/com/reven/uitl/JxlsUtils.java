@@ -42,7 +42,8 @@ public class JxlsUtils {
 		// evaluator.getJexlEngine().setSilent(true);
 		// 函数强制，自定义功能
 		Map<String, Object> funcs = new HashMap<String, Object>();
-		funcs.put("utils", new JxlsUtils()); // 添加自定义功能
+		// 添加自定义功能
+		funcs.put("utils", new JxlsUtils()); 
 		evaluator.getJexlEngine().setFunctions(funcs);
 		// 必须要这个，否者表格函数统计会错乱
 		jxlsHelper.setUseFastFormulaProcessor(false).processTemplate(context, transformer);

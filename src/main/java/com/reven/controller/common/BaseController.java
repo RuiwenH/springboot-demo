@@ -27,6 +27,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.reven.uitl.JsonUtil;
 
+/**
+ * @author reven
+ */
 public class BaseController {
 
     private static Logger logger = LoggerFactory.getLogger(BaseController.class);
@@ -130,7 +133,7 @@ public class BaseController {
         logger.debug("x-forwarded-for:" + getRequest().getHeader("x-forwarded-for"));
         logger.debug("Proxy-Client-IP:" + getRequest().getHeader("Proxy-Client-IP"));
         logger.debug("WL-Proxy-Client-IP:" + getRequest().getHeader("WL-Proxy-Client-IP"));
-        return ip.equals("0:0:0:0:0:0:0:1") ? "127.0.0.1" : ip;
+        return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
     }
 
     /**
@@ -142,8 +145,9 @@ public class BaseController {
         InetAddress address;
         String serverIpAddress = null;
         try {
-            address = InetAddress.getLocalHost(); // 获取的是本地的IP地址 //PC-20140317PXKX/192.168.0.121
-            serverIpAddress = address.getHostAddress();// 192.168.0.121
+            // 获取的是本地的IP地址 
+            address = InetAddress.getLocalHost(); 
+            serverIpAddress = address.getHostAddress();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }

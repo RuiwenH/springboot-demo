@@ -11,7 +11,11 @@ import tk.mybatis.mapper.common.IdsMapper;
 import tk.mybatis.mapper.common.special.InsertListMapper;
 
 /**
- * 定制MyBatis Mapper插件接口
+ * @ClassName:  Mapper   
+ * @Description:定制MyBatis Mapper插件接口
+ * @author reven
+ * @date   2018年8月28日
+ * @param <T>
  */
 public interface Mapper<T> extends BaseMapper<T>, ConditionMapper<T>, IdsMapper<T>, InsertListMapper<T> {
 	List<T> find(@Param("paramMap") Map<String, Object> paramMap);
