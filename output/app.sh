@@ -30,9 +30,9 @@ echo "参数：p0=$0,p1=$1,p2=$2,p3=$3"
 RUNNING_USER=reven # 指定运行用户
 SERVER_NAME=springboot-demo # jar的名字
 # 项目中日志地址
-LOG_PATH=/logs/springboot_demo_info.log
+LOG_PATH=logs/springboot_demo_info.log
 # 部署启动指定的配置文件
-DEPLOY_CONFIG=/deploy_config/demo_deploy.yml
+DEPLOY_CONFIG=deploy_config/demo_deploy.yml
 # 远程调试端口
 XDEBUG_ADDRESS=8000
 
@@ -63,7 +63,7 @@ fi
 if [ -z "$LOG_PATH"  ];then
     LOG_PATH=$APP_HOME/logs/$SERVER_NAME.out
 else
-    LOG_PATH="$APP_HOME$LOG_PATH"
+    LOG_PATH="$APP_HOME/$LOG_PATH"
 fi
 GC_LOG_PATH=$APP_HOME/logs/gclog/gc-$SERVER_NAME-$ADATE.log
 #JMX监控需用到
@@ -82,7 +82,7 @@ start(){
   if [ ! -n "$pid" ]; then
   
     #JAVA_CMD=" java -server -jar $JVM_OPTS $JAR_FILE > $LOG_PATH 2>&1 &"
-    JAVA_CMD="-server -jar $JVM_OPTS $JAR_FILE --spring.config.location=$APP_HOME$DEPLOY_CONFIG"
+    JAVA_CMD="-server -jar $JVM_OPTS $JAR_FILE --spring.config.location=$APP_HOME/$DEPLOY_CONFIG"
     
     if [ "$Xdebug" = "debug"  ];then
         JAVA_CMD="$JAVA_CMD $DEBUG_OPTS"
