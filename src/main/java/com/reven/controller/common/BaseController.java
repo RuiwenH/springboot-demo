@@ -3,8 +3,6 @@ package com.reven.controller.common;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +24,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.reven.uitl.JsonUtil;
+import com.reven.uitl.WebUtil;
 
 /**
  * @author reven
@@ -113,27 +112,15 @@ public class BaseController {
         return headerMap;
     }
 
-    /**   
-     * 获取用户IP，如果有nginx需要配置
-     * @return      
+    /**
+     * 获取客户端ip地址，如果有nginx需要配置x-forwarded-for等参数转发
+     * 
+     * @param request
+     * @return
      */
-    public String getIpAddress() {
-        String ip = getRequest().getHeader("x-forwarded-for");
-
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = getRequest().getHeader("Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = getRequest().getHeader("WL-Proxy-Client-IP");
-        }
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-            ip = getRequest().getRemoteAddr();
-        }
-        logger.debug("x-real-ip:" + getRequest().getHeader("x-real-ip"));
-        logger.debug("x-forwarded-for:" + getRequest().getHeader("x-forwarded-for"));
-        logger.debug("Proxy-Client-IP:" + getRequest().getHeader("Proxy-Client-IP"));
-        logger.debug("WL-Proxy-Client-IP:" + getRequest().getHeader("WL-Proxy-Client-IP"));
-        return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
+    public String getCliectIp() {
+        HttpServletRequest request = getRequest();
+        return WebUtil.getCliectIp(request);
     }
 
     /**
@@ -141,17 +128,8 @@ public class BaseController {
      * 
      * @return
      */
-    public String getServerIpAddress() {
-        InetAddress address;
-        String serverIpAddress = null;
-        try {
-            // 获取的是本地的IP地址 
-            address = InetAddress.getLocalHost(); 
-            serverIpAddress = address.getHostAddress();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        return serverIpAddress;
+    public String getServerIp() {
+        return WebUtil.getServerIp();
     }
 
     /**

@@ -24,7 +24,7 @@ import com.reven.model.entity.Demo;
 /**
  * @author klguang
  */
-public class JxlsUtils {
+public class JxlsUtil {
 
 	public static void exportExcel(InputStream is, OutputStream os, Map<String, Object> model) throws IOException {
 		Context context = PoiTransformer.createInitialContext();
@@ -43,7 +43,7 @@ public class JxlsUtils {
 		// 函数强制，自定义功能
 		Map<String, Object> funcs = new HashMap<String, Object>();
 		// 添加自定义功能
-		funcs.put("utils", new JxlsUtils()); 
+		funcs.put("utils", new JxlsUtil()); 
 		evaluator.getJexlEngine().setFunctions(funcs);
 		// 必须要这个，否者表格函数统计会错乱
 		jxlsHelper.setUseFastFormulaProcessor(false).processTemplate(context, transformer);
@@ -97,7 +97,7 @@ public class JxlsUtils {
 
 		model.put("demoList", demoList);
 		// 调用之前写的工具类，传入模板路径，输出流，和装有数据Map
-		JxlsUtils.exportExcel(templatePath, os, model);
+		JxlsUtil.exportExcel(templatePath, os, model);
 		os.close();
 		System.out.println("完成");
 	}

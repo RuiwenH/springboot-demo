@@ -101,8 +101,8 @@ public class DemoController extends BaseController {
             @RequestParam(defaultValue = "0") Integer size) {
         PageHelper.startPage(page, size);
         List<Demo> list = demoService.findAll();
-        logger.info("ServerIp={}", getServerIpAddress());
-        logger.info("UserIp={}", getIpAddress());
+        logger.info("ServerIp={}", getServerIp());
+        logger.info("UserIp={}", getCliectIp());
         logger.error(list.toString());
         logger.warn(list.toString());
         logger.info(list.toString());
