@@ -18,7 +18,7 @@ public class DemoJob {
      * @throws InterruptedException
      */
 
-    @Scheduled(cron = "0/2 * * 10-31 * *")
+//    @Scheduled(cron = "0/2 * * 10-31 * *")
 //    @Scheduled(cron = "${job.cron-expression.demo}")
 //    @Async
     public void cronDemo() throws InterruptedException {
@@ -32,7 +32,7 @@ public class DemoJob {
 
     }
 
-    @Scheduled(cron = "0 0/2 * * * *")
+//    @Scheduled(cron = "0 0/2 * * * *")
 //  @Scheduled(cron = "${job.cron-expression.demo}")
 //  @Async
     public void cronDemo2() throws InterruptedException {
