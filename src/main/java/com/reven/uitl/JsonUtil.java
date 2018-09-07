@@ -39,13 +39,14 @@ public class JsonUtil {
         return MAPPER.writeValueAsString(obj);
     }
 
-    public static Map toMap(String jsonString) {
-        Map result = new HashMap();
+    public static Map<String,Object> toMap(String jsonString) {
+        Map<String,Object>  result = new HashMap<>();
         try {
             String key = null;
             String value = null;
             JSONObject jsonObject = JSONObject.parseObject(jsonString);
 
+            @SuppressWarnings("rawtypes")
             Iterator iterator = (Iterator) jsonObject.keySet();
 
             while (iterator.hasNext()) {

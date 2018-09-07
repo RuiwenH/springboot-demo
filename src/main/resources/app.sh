@@ -93,7 +93,7 @@ start(){
     echo "---------------------------------"
     echo "启动完成，按CTRL+C退出日志界面即可>>>>>---"
     echo "---------------------------------"
-    
+    sleep 5s
     tail -f $LOG_PATH
   else
       echo "$SERVER_NAME is runing PID: $pid"   

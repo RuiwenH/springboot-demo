@@ -159,7 +159,6 @@ public class BaseController {
      * 
      * @return
      */
-    @SuppressWarnings("unchecked")
     public Map<String, Object> getRequestMap() {
         try {
             InputStream inStream = this.getRequest().getInputStream();

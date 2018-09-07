@@ -106,3 +106,10 @@ https://blog.csdn.net/zhaoyahui_666/article/details/78835128
 https://www.cnblogs.com/ITGirl00/archive/2013/02/23/SSI.html
 https://www.cnblogs.com/NeverCtrl-C/p/8191920.html
 https://blog.csdn.net/fgsgsgfgsg/article/details/46860049
+
+## 全局的错误处理方式
+* 功能：定制错误页面，根据ajax或浏览器页面请求返回不同的结果
+* ajax请求错误：http://localhost/testAjax.html
+* demo返回错误页面：http://localhost/demo/testException
+* demo返回错误页面：参数封装错误http://localhost/demo/testException2?date=20180830
+* [参考文章](https://www.cnblogs.com/okokabcd/p/9175797.html)

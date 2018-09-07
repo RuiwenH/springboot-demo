@@ -1,6 +1,8 @@
 package com.reven.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +11,10 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +31,7 @@ import com.reven.model.entity.Demo;
 import com.reven.service.DemoService;
 
 /**
- * @ClassName:  DemoController   
+ * @ClassName: DemoController
  * @author reven
  */
 @RestController
@@ -35,6 +40,37 @@ public class DemoController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(DemoController.class);
     @Resource
     private DemoService demoService;
+
+    @GetMapping("/testException")
+    public ResResult testException() {
+        System.out.println(1 / 0);
+        return ResResult.success();
+    }
+
+    @GetMapping("/testException1")
+    public ResResult testException1() {
+        Integer.parseInt("ssss");
+        return ResResult.success();
+    }
+
+    /**
+     * 测试参数绑定错误异常是否捕获
+     * 
+     * @param a
+     * @return
+     */
+    @GetMapping("/testException2")
+    public ResResult testException2(Date date) {
+        System.out.println(date);
+        return ResResult.success(date);
+    }
+    
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
 
     @PostMapping("/add")
     public ResResult add(Demo demo) {

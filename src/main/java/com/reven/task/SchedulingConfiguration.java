@@ -1,11 +1,11 @@
 package com.reven.task;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 /**
  * @author reven
@@ -18,11 +18,9 @@ public class SchedulingConfiguration {
     @Bean(destroyMethod = "shutdown")
     public Executor taskScheduler() {
         // 数量跟Scheduled要多一些
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(3);
-        executor.setMaxPoolSize(3);
-        executor.setQueueCapacity(10);
-        executor.initialize();
+        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(3);
+//        ThreadFactory threadFactory;
+//        executor.setThreadFactory(threadFactory);
         return executor;
     }
 }

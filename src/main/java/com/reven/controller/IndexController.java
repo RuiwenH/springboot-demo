@@ -22,7 +22,6 @@ public class IndexController extends BaseController {
         model.addAttribute("hello", "张三" + new Date());
         String serverIp = getServerIpAddress();
         String userIp = getIpAddress();
-        model.addAttribute("ServerIp", serverIp);
         model.addAttribute("UserIp", userIp);
         logger.info("ServerIp={}", serverIp);
         logger.info("UserIp={}", userIp);
