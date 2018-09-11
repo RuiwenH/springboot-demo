@@ -43,7 +43,11 @@ public class GlobalExceptionHandler {
         }
     }
 
-    // 判断是否是ajax请求
+    /**   
+     * * 判断是否是ajax请求
+     * @param httpRequest
+     * @return      
+     */
     public static boolean isAjax(HttpServletRequest httpRequest) {
         String xRequestedWith = httpRequest.getHeader("X-Requested-With");
         return (xRequestedWith != null && "XMLHttpRequest".equals(xRequestedWith));

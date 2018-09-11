@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringBootDemoApplicationTests {
+public class SpringBootDemoApplicationTest {
 
 	@Test
 	public void test() {

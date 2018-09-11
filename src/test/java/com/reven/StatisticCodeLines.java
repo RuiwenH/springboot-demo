@@ -17,15 +17,21 @@ public class StatisticCodeLines {
     public static int normalLines = 0; // 有效程序行数
     public static int whiteLines = 0; // 空白行数
     public static int commentLines = 0; // 注释行数
-    // 包含该字符串的目录忽略
+    /**   
+     * @Fields ignoreDirectory : 包含该字符串的目录忽略
+     */  
     public static String[] ignoreDirectory = { "\\target", "\\.svn", "\\.settings", "\\metadata.bak",
             "\\${env.RELEASE_HOME}", "\\logs", "\\js\\bootstrap", "\\js\\easyui", "\\js\\My97DatePicker",
             "\\js\\echarts" };
 
-    // 统计的文件后缀
+    /**   
+     * @Fields fileExtension : 统计的文件后缀
+     */  
     public static String[] fileExtension = { ".*\\.java", ".*\\.xml", ".*\\.html", ".*\\.shtml", ".*\\.js" };
 
-    // 包含该字符串的目录忽略
+    /**   
+     * @Fields ignoreFile : 包含该字符串的目录忽略
+     */  
     public static String[] ignoreFile = { "china.js", "echarts.js", "jquery.bgiframe.js", "jquery.common.js",
             "jquery.min.js", "jquery.nicescroll.js", "jquery.openscroll.js", "jquery.webui-popover.min.js" ,"scriptbreaker-multiple-accordion-1.js"};
 
@@ -79,9 +85,9 @@ public class StatisticCodeLines {
         BufferedReader br = null;
         // 判断此行是否为注释行
         boolean comment = false;
-        int temp_whiteLines = 0;
-        int temp_commentLines = 0;
-        int temp_normalLines = 0;
+        int tempWhiteLines = 0;
+        int tempCommentLines = 0;
+        int tempNormalLines = 0;
 
         try {
             br = new BufferedReader(new FileReader(file));
@@ -91,7 +97,7 @@ public class StatisticCodeLines {
                 if (line.matches("^[\\s&&[^\\n]]*$")) {
                     // 空行
                     whiteLines++;
-                    temp_whiteLines++;
+                    tempWhiteLines++;
                 } else if (line.startsWith("/*") && !line.endsWith("*/")) {
                     // 判断此行为"/*"开头的注释行
                     commentLines++;
@@ -99,25 +105,25 @@ public class StatisticCodeLines {
                 } else if (comment == true && !line.endsWith("*/")) {
                     // 为多行注释中的一行（不是开头和结尾）
                     commentLines++;
-                    temp_commentLines++;
+                    tempCommentLines++;
                 } else if (comment == true && line.endsWith("*/")) {
                     // 为多行注释的结束行
                     commentLines++;
-                    temp_commentLines++;
+                    tempCommentLines++;
                     comment = false;
                 } else if (line.startsWith("//")) {
                     // 单行注释行
                     commentLines++;
-                    temp_commentLines++;
+                    tempCommentLines++;
                 } else {
                     // 正常代码行
                     normalLines++;
-                    temp_normalLines++;
+                    tempNormalLines++;
                 }
             }
 
-            System.out.println("有效行数" + temp_normalLines + " ,空白行数" + temp_whiteLines + " ,注释行数" + temp_commentLines
-                    + " ,总行数" + (temp_normalLines + temp_whiteLines + temp_commentLines) + "     " + file.getName());
+            System.out.println("有效行数" + tempNormalLines + " ,空白行数" + tempWhiteLines + " ,注释行数" + tempCommentLines
+                    + " ,总行数" + (tempNormalLines + tempWhiteLines + tempCommentLines) + "     " + file.getName());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
