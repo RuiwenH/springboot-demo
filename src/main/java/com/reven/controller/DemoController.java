@@ -28,7 +28,7 @@ import com.reven.controller.common.BaseController;
 import com.reven.controller.common.JxlsExcelView;
 import com.reven.controller.common.ResResult;
 import com.reven.model.entity.Demo;
-import com.reven.service.DemoService;
+import com.reven.service.IDemoService;
 
 /**
  * @ClassName: DemoController
@@ -39,7 +39,7 @@ import com.reven.service.DemoService;
 public class DemoController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(DemoController.class);
     @Resource
-    private DemoService demoService;
+    private IDemoService demoService;
 
     @GetMapping("/testException")
     public ResResult testException() {
@@ -64,7 +64,7 @@ public class DemoController extends BaseController {
         System.out.println(date);
         return ResResult.success(date);
     }
-    
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -72,9 +72,16 @@ public class DemoController extends BaseController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
-    @PostMapping("/add")
+    @RequestMapping("/add")
     public ResResult add(Demo demo) {
         demoService.save(demo);
+//        for (int i = 0; i < 10000; i++) {
+//            demo.setAcDd("eeeeeeeee_"+i);
+//            demo.setDate(new Date());
+//            demo.setKey("keykkkkkkk_"+i);
+//            demo.setName("namennnnnnnnn_"+i);
+//            demoService.save(demo);
+//        }
         return ResResult.success();
     }
 
@@ -98,17 +105,14 @@ public class DemoController extends BaseController {
 
     @GetMapping("/list")
     public ResResult list(@RequestParam(defaultValue = "0") Integer page,
-            @RequestParam(defaultValue = "0") Integer size) {
-        PageHelper.startPage(page, size);
-        List<Demo> list = demoService.findAll();
+            @RequestParam(defaultValue = "10") Integer size) {
         logger.info("ServerIp={}", getServerIp());
+        logger.error("UserIp={}", getCliectIp());
+        logger.warn("UserIp={}", getCliectIp());
         logger.info("UserIp={}", getCliectIp());
-        logger.error(list.toString());
-        logger.warn(list.toString());
-        logger.info(list.toString());
-        logger.debug(list.toString());
-        logger.trace(list.toString());
-        PageInfo<Demo> pageInfo = new PageInfo<Demo>(list);
+        logger.debug("UserIp={}", getCliectIp());
+        logger.trace("UserIp={}", getCliectIp());
+        PageInfo<Demo> pageInfo = demoService.findAll(page, size);
         return ResResult.success(pageInfo);
     }
 
