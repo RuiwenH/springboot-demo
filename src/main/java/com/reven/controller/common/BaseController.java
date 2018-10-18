@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -31,12 +29,8 @@ import com.reven.uitl.WebUtil;
  */
 public class BaseController {
 
-    private static Logger logger = LoggerFactory.getLogger(BaseController.class);
-
-    // header 常量定义
     private static final String DEFAULT_ENCODING = "UTF-8";
     private static final boolean DEFAULT_NOCACHE = true;
-    // Content Type 常量定义
     public static final String TEXT_TYPE = "text/plain";
     public static final String JSON_TYPE = "application/json";
     public static final String XML_TYPE = "text/xml";

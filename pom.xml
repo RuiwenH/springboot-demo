@@ -9,7 +9,7 @@
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>function-demo</name>
+	<name>Spring Boot Demo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -63,10 +63,16 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>1.3.2</version>
 		</dependency>
+		<!-- 监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
+			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		
 		<!-- swagger -->
 	    <dependency>
 	        <groupId>io.springfox</groupId>
@@ -140,7 +146,6 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>24.1-jre</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -203,6 +208,7 @@
 				<executions>
 					<execution>
 						<goals>
+						    <goal>build-info</goal>
 							<!-- 利用重新打包，将文件排除 -->
 							<goal>repackage</goal>
 						</goals>
