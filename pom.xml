@@ -9,7 +9,7 @@
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>function-demo</name>
+	<name>Spring Boot Demo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -67,6 +67,30 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server</artifactId>
+            <version>1.5.7</version>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-server-ui</artifactId>
+            <version>1.5.7</version>
+        </dependency>
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>1.5.7</version>
+        </dependency>
+		<!-- 在管理界面中与 JMX-beans 进行交互所需要被依赖的 JAR -->
+		<dependency>
+			<groupId>org.jolokia</groupId>
+			<artifactId>jolokia-core</artifactId>
+		</dependency>
+		<dependency>    
+          <groupId>org.springframework.boot</groupId>    
+          <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 		<!-- swagger -->
 	    <dependency>
 	        <groupId>io.springfox</groupId>
@@ -140,7 +164,6 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>24.1-jre</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -203,6 +226,7 @@
 				<executions>
 					<execution>
 						<goals>
+						    <goal>build-info</goal>
 							<!-- 利用重新打包，将文件排除 -->
 							<goal>repackage</goal>
 						</goals>
