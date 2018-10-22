@@ -76,6 +76,7 @@ management:
 security:
   basic:
     path: /manage #对于manage这个路径才进行拦截
+    enabled: true
   user:
     name: reven
     password: secret123
@@ -94,5 +95,5 @@ endpoints:
     sensitive: true
     enabled: true
   metrics:  
-    sensitive: false
+    sensitive: true
     enabled: true
