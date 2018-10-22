@@ -68,7 +68,6 @@ spring:
     cache-names: demo-cache10min,demo-cache1Hour,demo-cache1Day
 
 ## 监控与管理
-<<<<<<< HEAD
 management:
   security:
     enabled: true  # 打开安全认证——通过security认证
@@ -96,42 +95,4 @@ endpoints:
     enabled: true
   metrics:  
     sensitive: false
-=======
-security:
-  basic:
-    enabled: true
-    path: /manage #对于manage这个路径才进行拦截
-  user: 
-    name: reven
-    password: secret123
-    
-management:
-  security:
-    enabled: true
-    roles: SUPERUSER
-  context-path: /manage
-  
-spring.boot:
-    admin:
-      context-path: /admin2
-      client:
-        prefer-ip: true # 解决windows下运行时无法识别主机名的问题
-        service-url: http://localhost/
-        
-# Actuator 的info端点显示信息
-info.app:
-   name: "@project.name@" #从pom.xml中获取
-   description: "@project.description@"
-   version: "@project.version@"
-   spring-boot-version: "@project.parent.version@"
-     
-endpoints:
-  shutdown:
-    enabled: false
-  health:
-    sensitive: true
-    enabled: true
-  metrics:  
-    sensitive: true
->>>>>>> branch 'temp' of https://github.com/RuiwenH/springboot-demo
     enabled: true
