@@ -6,10 +6,13 @@
 <!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
 <configuration scan="false" scanPeriod="30 seconds">
 	<contextName>springboot-demo</contextName>
+<<<<<<< HEAD
     <!-- Spring Boot Admin 管理应用的日志级别。 -->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <jmxConfigurator/>
 	
+=======
+>>>>>>> branch 'temp' of https://github.com/RuiwenH/springboot-demo
 	<!--定义日志文件的存储地址,这里配置为相对路径会 -->
 	<property name="log.path" value="logs" />
 
