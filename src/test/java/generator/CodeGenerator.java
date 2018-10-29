@@ -64,8 +64,8 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
         // genCode("输入表名");
-        genCodeByCustomModelName("t_demo", "Demo");
-//		genCodeByCustomModelName("t_demo_copy", "DemoCopy");
+        genCodeByCustomModelName("goods", "Goods");
+		genCodeByCustomModelName("goods_first_class", "GoodsFirstClass");
 
     }
 
@@ -208,7 +208,7 @@ public class CodeGenerator {
             data.put("basePackage", ProjectConstant.BASE_PACKAGE);
 
             File file = new File(
-                    PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + modelNameUpperCamel + "Service.java");
+                    PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE + "I"+modelNameUpperCamel + "Service.java");
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
