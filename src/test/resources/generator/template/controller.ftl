@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ${basePackage}.model.entity.${modelNameUpperCamel};
-import ${basePackage}.service.${modelNameUpperCamel}Service;
+import ${basePackage}.service.I${modelNameUpperCamel}Service;
 import ${basePackage}.controller.common.ResResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -23,7 +23,7 @@ import com.github.pagehelper.PageInfo;
 @RequestMapping("${baseRequestMapping}")
 public class ${modelNameUpperCamel}Controller {
     @Resource
-    private ${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
+    private I${modelNameUpperCamel}Service ${modelNameLowerCamel}Service;
 
     @PostMapping("/add")
     public ResResult add(${modelNameUpperCamel} ${modelNameLowerCamel}) {
