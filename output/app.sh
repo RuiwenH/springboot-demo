@@ -30,7 +30,7 @@ echo "参数：p0=$0,p1=$1,p2=$2,p3=$3"
 RUNNING_USER=reven # 指定运行用户
 SERVER_NAME=springboot-demo # jar的名字
 # 项目中日志地址
-LOG_PATH=logs/springboot_demo_info.log
+LOG_PATH=logs/info.log
 # 部署启动指定的配置文件
 DEPLOY_CONFIG=deploy_config/demo_deploy.yml
 # 远程调试端口
