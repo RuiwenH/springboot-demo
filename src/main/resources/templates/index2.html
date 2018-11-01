@@ -1,0 +1,19 @@
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>数据分享</title>
+    <link rel="stylesheet" type="text/css" href="/static/jquery-easyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/jquery-easyui/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/jquery-easyui/themes/demo.css"/>
+    <script type="text/javascript" src="/static/jquery-easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/jquery-easyui/jquery.easyui.min.js"></script>
+</head>
+<!-- UserIp:<div th:text="${UserIp}"></div> -->
+<body class="easyui-layout" style="width: 1024px;height: 100%">
+    <div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">north region</div>
+    <div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">west content</div>
+    <div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">east region</div>
+    <div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">south region</div>
+    <div data-options="region:'center',title:'Center'"></div>
+</body>
+</html>
