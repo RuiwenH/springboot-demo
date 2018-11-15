@@ -15,10 +15,11 @@ logging:
 # 控制台彩色日志，需要插件支持
 spring.output.ansi.enabled: ALWAYS
 
-# 定位模板的目录
-spring.mvc.view.prefix: classpath:/templates/
-# 给返回的页面添加后缀名
-spring.mvc.view.suffix: .html
+spring.mvc:
+  #view.suffix: .html  # 给返回的页面添加后缀名
+  #view.prefix: classpath:/templates/  # 定位模板的目录
+  static-path-pattern: /static/** # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+
 
 # 数据库配置
 deploy.datasource:
@@ -62,8 +63,7 @@ mybatis:
   configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapperLocations: classpath:mapper/*Mapper.xml,classpath*:sqlmap/*Mapper.xml
 
-spring:
-  cache:
+spring.cache:
   # demo-是系统名称或规定使用的模块名称之类，注意保证不同系统之间名字的唯一
     cache-names: demo-cache10min,demo-cache1Hour,demo-cache1Day
 

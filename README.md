@@ -104,7 +104,17 @@ https://blog.csdn.net/zhaoyahui_666/article/details/78835128
 ## springBoot的监控和管理
 * [spring-boot-actuator参考文档](https://blog.csdn.net/l_sail/article/details/70495601)
 
-## SSI 如何找到源文件
+## springboot 访问静态资源
+https://blog.csdn.net/weixin_42456466/article/details/80688681
+
+## 如何彻底实现前后端彻底分离
+https://blog.csdn.net/larger5/article/details/81047869
+https://blog.csdn.net/larger5/article/details/81063438
+
+https://blog.csdn.net/wabiaozia/article/details/75092623
+## 无模板页面抽出公共部分之js脚本实现方案
+https://blog.csdn.net/wabiaozia/article/details/75092623
+## 无模板页面抽出公共部分之SSI方案--如何找到源文件
 https://www.cnblogs.com/ITGirl00/archive/2013/02/23/SSI.html
 https://www.cnblogs.com/NeverCtrl-C/p/8191920.html
 https://blog.csdn.net/fgsgsgfgsg/article/details/46860049
