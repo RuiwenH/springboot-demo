@@ -20,5 +20,10 @@ public class Foo {
 //        int d=128;
 //        System.out.println(c.equals(d));
 //        System.out.println(c==d);
+        
+        String ab="addfg";
+        System.out.println(ab.replace("dd", "DD"));
+        System.out.println(ab.replaceAll("d", "D"));
+        
     }
 }
