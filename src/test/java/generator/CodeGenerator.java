@@ -64,8 +64,7 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
         // genCode("输入表名");
-        genCodeByCustomModelName("goods", "Goods");
-		genCodeByCustomModelName("goods_first_class", "GoodsFirstClass");
+        genCodeByCustomModelName("system_update_history", "SystemUpdateHistory");
 
     }
 
