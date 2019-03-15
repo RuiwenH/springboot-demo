@@ -26,13 +26,13 @@
 echo "参数：p0=$0,p1=$1,p2=$2,p3=$3"
 ## p0=./app.sh,p1=restart,p2=pro,p3=debug
 
-# 变量
+# 变量 
 RUNNING_USER=reven # 指定运行用户
 SERVER_NAME=springboot-demo # jar的名字
 # 项目中日志地址
 LOG_PATH=logs/info.log
 # 部署启动指定的配置文件
-DEPLOY_CONFIG=deploy_config/demo_deploy.yml
+DEPLOY_CONFIG=deploy_config/deploy.yml
 # 远程调试端口
 XDEBUG_ADDRESS=8000
 
@@ -85,7 +85,7 @@ start(){
     JAVA_CMD="-server -jar $JVM_OPTS $JAR_FILE --spring.config.location=$APP_HOME/$DEPLOY_CONFIG"
     
     if [ "$Xdebug" = "debug"  ];then
-        JAVA_CMD="$JAVA_CMD $DEBUG_OPTS"
+        JAVA_CMD="$DEBUG_OPTS $JAVA_CMD"
     fi
     echo "JAVA_CMD=$JAVA_CMD"
     #su - $RUNNING_USER -c "$JAVA_CMD"

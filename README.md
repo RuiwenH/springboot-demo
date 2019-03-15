@@ -83,9 +83,15 @@ https://blog.csdn.net/u011924665/article/details/78966752
 * 参考文档 [springmvc导出](https://blog.csdn.net/zjl103/article/details/49666101)
 * [参考文档](https://blog.csdn.net/u010447549/article/details/80787673)
 * 参考文档 [官网http://jxls.sourceforge.net](http://jxls.sourceforge.net)
+* http测试入口：http://localhost:8082/demo/exportExcel
 
-## springmvc 无模板导出excel
-* 场景：数据模板多、导出的数据统一的格式。例如导出10个表的数据。
+## springmvc 通用excel导出
+* 场景：导出相关数据，导出的数据统一的格式。例如要导出10个表的数据，如果用模板导出，要写十个模板，而且不方便增加列
+* [参考文档] https://blog.csdn.net/l1028386804/article/details/79659605
+* 功能特点：指定列头、指定字段、
+* 工具类， main方法测试类TestExcelUtil.java
+* excel导出http测试入口：http://localhost:8082/demo/exportExcelUtil?filename=我的用户
+* excel导入测试：http://localhost:8082/static/page/importExcel.html,导入之前导出的excel（demo文件路径：static/excel/我的用户.xlsx）
 
 ## 定时任务
 * 基本要求： 异步执行、有线程池控制最大并发执行数量。

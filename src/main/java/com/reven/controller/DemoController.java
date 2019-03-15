@@ -4,10 +4,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
@@ -27,7 +32,9 @@ import com.reven.controller.common.BaseController;
 import com.reven.controller.common.JxlsExcelView;
 import com.reven.controller.common.ResResult;
 import com.reven.model.entity.Demo;
+import com.reven.model.entity.DemoExcel;
 import com.reven.service.IDemoService;
+import com.reven.uitl.ExcelUtil;
 
 /**
  * @ClassName: DemoController
@@ -39,6 +46,49 @@ public class DemoController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(DemoController.class);
     @Resource
     private IDemoService demoService;
+
+    @RequestMapping(value = "/exportExcelUtil")
+    public void exportExcel(HttpServletResponse response, @RequestParam("filename") String filename) throws Exception {
+        // 准备数据或从db查询
+        List<DemoExcel> list = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            if (i < 500) {
+                list.add(new DemoExcel(1 + i, "张三" + i, new Date(), "zhangsan" + i, true, ((float) 1.3 + i), 1.4 + i,
+                        (long) 1.5 + i));
+            } else {
+                list.add(new DemoExcel(1 + i, "李四" + i, new Date(), "lisi" + i, false, ((float) 2.3 + i), 28899.8884 + i,
+                        (long) 2.0005 + i));
+            }
+        }
+        LinkedHashMap<String, String> filedMap = new LinkedHashMap<String, String>();
+        filedMap.put("id", "ID");
+        filedMap.put("name", "姓名");
+        filedMap.put("date", "日期");
+        filedMap.put("enName", "英文名");
+        filedMap.put("flag", "上班中");
+        filedMap.put("numFloat", "float");
+        filedMap.put("numDouble", "double");
+        filedMap.put("numLong", "long");
+        ExcelUtil.responseExcel(filename, "用户导出", 500, list, filedMap, response);
+    }
+
+    @RequestMapping(value = "/importExcel")
+    public ResResult importExcel(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
+        LinkedHashMap<String, String> filedMap = new LinkedHashMap<String, String>();
+        filedMap.put("id", "ID");
+        filedMap.put("name", "姓名");
+        filedMap.put("date", "日期");
+        filedMap.put("flag", "上班中");
+        filedMap.put("enName", "英文名");
+        filedMap.put("numFloat", "float");
+        filedMap.put("numDouble", "double");
+        filedMap.put("numLong", "long");
+        List<DemoExcel> list = ExcelUtil.excelToList(file.getOriginalFilename(),file.getInputStream(), 0, 0, DemoExcel.class, filedMap);
+        for (DemoExcel demoExcel : list) {
+            System.out.println(demoExcel.toString());
+        }
+        return ResResult.success(list);
+    }
 
     @GetMapping("/testException")
     public ResResult testException() {
