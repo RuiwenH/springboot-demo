@@ -32,7 +32,7 @@ SERVER_NAME=springboot-demo # jar的名字
 # 项目中日志地址
 LOG_PATH=logs/info.log
 # 部署启动指定的配置文件
-DEPLOY_CONFIG=deploy_config/deploy.yml
+# DEPLOY_CONFIG=deploy_config/deploy.yml
 # 远程调试端口
 XDEBUG_ADDRESS=8000
 
@@ -60,6 +60,10 @@ if [ ! -d "$APP_HOME/logs/gclog" ];then
   mkdir -p $APP_HOME/logs/gclog
 fi
 
+if [ ! -d "$APP_HOME/data/tmp" ];then
+  mkdir -p $APP_HOME/data/tmp
+fi
+
 if [ -z "$LOG_PATH"  ];then
     LOG_PATH=$APP_HOME/logs/$SERVER_NAME.out
 else
@@ -70,8 +74,8 @@ GC_LOG_PATH=$APP_HOME/logs/gclog/gc-$SERVER_NAME-$ADATE.log
 JMX="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1091 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
 #JVM参数
 #-Djeesuite.configcenter.profile=$ENV
-JVM_OPTS="-Dname=$SERVER_NAME -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Duser.timezone=Asia/Shanghai -Xms1024M"
-JVM_OPTS=" $JVM_OPTS -Xmx1024M  -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintGCDateStamps -Xloggc:$GC_LOG_PATH -XX:+PrintGCDetails -XX:NewRatio=1 -XX:SurvivorRatio=30 -XX:+UseParallelGC -XX:+UseParallelOldGC"
+JVM_OPTS="-Dname=$SERVER_NAME -Djava.awt.headless=true -Djava.net.preferIPv4Stack=true -Duser.timezone=Asia/Shanghai -Djava.io.tmpdir=$APP_HOME/data/tmp "
+JVM_OPTS=" $JVM_OPTS -Xms1024M -Xmx1024M  -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintGCDateStamps -Xloggc:$GC_LOG_PATH -XX:+PrintGCDetails -XX:NewRatio=1 -XX:SurvivorRatio=30 -XX:+UseParallelGC -XX:+UseParallelOldGC"
 JAR_FILE=$SERVER_NAME.jar
 DEBUG_OPTS="-Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=$XDEBUG_ADDRESS,suspend=n"
 pid=0
@@ -82,7 +86,8 @@ start(){
   if [ ! -n "$pid" ]; then
   
     #JAVA_CMD=" java -server -jar $JVM_OPTS $JAR_FILE > $LOG_PATH 2>&1 &"
-    JAVA_CMD="-server -jar $JVM_OPTS $JAR_FILE --spring.config.location=$APP_HOME/$DEPLOY_CONFIG"
+    # JAVA_CMD="-server -jar $JVM_OPTS $JAR_FILE --spring.config.location=$APP_HOME/$DEPLOY_CONFIG"
+    JAVA_CMD="-server -jar $JVM_OPTS $JAR_FILE "
     
     if [ "$Xdebug" = "debug"  ];then
         JAVA_CMD="$DEBUG_OPTS $JAVA_CMD"

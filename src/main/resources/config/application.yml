@@ -6,11 +6,9 @@
 # 属性和值也是大小写敏感
 # 数据格式为k:(空格)v：表示一对键值对（空格必须有）；
 # 以空格的缩进来控制层级关系；
-# 其他： 建议使用跟项目相关的名称作为文件名，避免运维覆盖
-
 spring.profiles.active: pro
 
-server.port: 80
+server.port: 8082
 
 logging.level:
   root: info # 总的日志级别

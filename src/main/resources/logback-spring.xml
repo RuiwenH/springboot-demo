@@ -6,6 +6,7 @@
 <!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
 <configuration scan="false" scanPeriod="30 seconds">
 	<contextName>springboot-demo</contextName>
+	<property name="log.project.name" value="springboot-demo" />
     <!-- Spring Boot Admin 管理应用的日志级别。问题：造成重复输出了，待解决
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <jmxConfigurator/> -->
@@ -20,7 +21,11 @@
                     converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
     <!-- 彩色日志格式 -->
     <property name="CONSOLE_LOG_PATTERN"
-              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+              value="[${log.project.name}] ${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+    
+    <property name="file.log.pattern" value="[${log.project.name}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger[%L] - %msg%n" />
+    
+    
     <!--1. 输出到控制台-->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -31,8 +36,7 @@
     </appender>
     
     
-    <property name="file.log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger[%L] - %msg%n" />
-    
+
     <!-- 1 level为 DEBUG级别以上的 日志，时间滚动输出  -->
     <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文档的路径及文档名 -->
@@ -145,6 +149,7 @@
     -->
 
     <root level="INFO">
+        <appender-ref ref="CONSOLE" />
         <appender-ref ref="INFO_FILE" />
         <appender-ref ref="ERROR_FILE" />
     </root>
