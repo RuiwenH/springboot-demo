@@ -1,10 +1,11 @@
 package com.reven.uitl;
 
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -72,8 +73,7 @@ public class ExcelUtil {
      * @throws Exception
      */
     public static <T> void responseExcel(String fileName, String sheetName, int sheetSize, List<T> list,
-            LinkedHashMap<String, String> fieldMap, HttpServletResponse response)
-            throws Exception {
+            LinkedHashMap<String, String> fieldMap, HttpServletResponse response) throws Exception {
         if (StringUtils.isEmpty(fileName)) {
             // 设置默认文件名为当前时间：年月日时分秒
             fileName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date()).toString();
@@ -485,10 +485,18 @@ public class ExcelUtil {
         if (field != null) {
             field.setAccessible(true);
             value = field.get(o);
-        } else {
-//            throw new ServiceException("NOT_EXIST_FIELD", o.getClass().getSimpleName() + "类不存在字段名 " + fieldName);
-            throw new ServiceException(o.getClass().getSimpleName() + "类不存在字段名 " + fieldName);
         }
+        if (value == null) {
+            PropertyDescriptor pd = new PropertyDescriptor(fieldName, o.getClass());
+            Method readMethod = pd.getReadMethod();
+            if (readMethod != null) {
+                value = readMethod.invoke(o);
+            }
+        }
+//        if (value == null && field == null) {
+////          throw new ServiceException("NOT_EXIST_FIELD", o.getClass().getSimpleName() + "类不存在字段名 " + fieldName);
+//            throw new ServiceException(o.getClass().getSimpleName() + "类不存在字段名或对应的get方法 " + fieldName);
+//        }
 
         return value;
     }
