@@ -6,7 +6,11 @@ import java.util.Map;
 import tk.mybatis.mapper.entity.Condition;
 
 /**
- * Service 层 基础接口，其他Service 接口 请继承该接口
+ * @ClassName:  IBaseService   
+ * @Description: Service 层 基础接口，其他Service 接口 请继承该接口
+ * @author reven
+ * @date   2018年8月28日
+ * @param <T>
  */
 public interface IBaseService<T> {
 	void save(T model);// 持久化

@@ -5,6 +5,8 @@ SpringBoot 常用功能演示及使用规范，最佳实践。
 * 参考  https://blog.csdn.net/ubuntu64fan/article/details/80555915
 
 ## 数据源配置——生产环境配置
+* 通用场景配置：
+https://blog.csdn.net/u011924665/article/details/78966752
 
 ## 多数据源配置
 
@@ -26,11 +28,11 @@ SpringBoot 常用功能演示及使用规范，最佳实践。
 * 功能：start 启动时检查程序是否已经启动
 * 功能：stop 停止程序、stop之前会先dump
 * 功能：dump系统状态和jvm信息到文件中
+* 实现：见app.sh
 * 参考文档 [url](https://blog.csdn.net/vakinge/article/details/78706679)
 * 参考文档 [url](https://github.com/junbaor/shell_script/blob/master/spring-boot.sh)
 
 ## mybatis 通用插件及分页插件
-
 * 场景：
 * 使用：
 
@@ -66,24 +68,30 @@ SpringBoot 常用功能演示及使用规范，最佳实践。
 * 方案：<br>
 * [参考文档]1(https://www.cnblogs.com/yhtboke/p/5653895.html)
 
-## Spring-cache
-* 运用场景：
-* 使用注意事项：
-* 如何使用demo：https://www.cnblogs.com/xiaoping1993/p/7761123.html
+
 
 
 ## 接口签名认证
 
 ## springmvc 基于模板导出excel
+* 示例
 * 使用jxls通过模板导出excel
 * 参考文档 [官网](http://jxls.sourceforge.net/reference/excel_markup.html)
 * 参考文档 [JXLS 2.4.0系列教程（一）简单使用](https://www.cnblogs.com/foxlee1024/p/7616987.html)
-* 参考文档 [JXLS 2.4.0系列教程（二）——循环导出一个链表的数据](http://www.cnblogs.com/foxlee1024/p/7617120.html)
-作者还提供了其他更复杂的教程，可以通过文章的下一篇查阅，例如分Sheet、嵌套循环、统计、一些bug等
-* 参考文档 [](https://blog.csdn.net/sinat_15769727/article/details/78898894)
+* 参考文档 [JXLS 2.4.0系列教程（二）——循环导出一个链表的数据](http://www.cnblogs.com/foxlee1024/p/7617120.html)作者还提供了其他更复杂的教程，可以通过文章的下一篇查阅，例如分Sheet、嵌套循环、统计、一些bug等
+* [参考文档](https://blog.csdn.net/sinat_15769727/article/details/78898894)
 * 参考文档 [springmvc导出](https://blog.csdn.net/zjl103/article/details/49666101)
-## springmvc 无模板导出excel
-* 场景：数据模板多、导出的数据统一的格式。例如导出10个表的数据。
+* [参考文档](https://blog.csdn.net/u010447549/article/details/80787673)
+* 参考文档 [官网http://jxls.sourceforge.net](http://jxls.sourceforge.net)
+* http测试入口：http://localhost:8082/demo/exportExcel
+
+## springmvc 通用excel导出
+* 场景：导出相关数据，导出的数据统一的格式。例如要导出10个表的数据，如果用模板导出，要写十个模板，而且不方便增加列
+* [参考文档] https://blog.csdn.net/l1028386804/article/details/79659605
+* 功能特点：指定列头、指定字段、
+* 工具类， main方法测试类TestExcelUtil.java
+* excel导出http测试入口：http://localhost:8082/demo/exportExcelUtil?filename=我的用户
+* excel导入测试：http://localhost:8082/static/page/importExcel.html,导入之前导出的excel（demo文件路径：static/excel/我的用户.xlsx）
 
 ## 定时任务
 * 基本要求： 异步执行、有线程池控制最大并发执行数量。
@@ -102,7 +110,50 @@ https://blog.csdn.net/zhaoyahui_666/article/details/78835128
 ## springBoot的监控和管理
 * [spring-boot-actuator参考文档](https://blog.csdn.net/l_sail/article/details/70495601)
 
-## SSI 如何找到源文件
+## springboot 访问静态资源
+https://blog.csdn.net/weixin_42456466/article/details/80688681
+
+## 如何彻底实现前后端彻底分离
+https://blog.csdn.net/larger5/article/details/81047869
+https://blog.csdn.net/larger5/article/details/81063438
+
+https://blog.csdn.net/wabiaozia/article/details/75092623
+## 无模板页面抽出公共部分之js脚本实现方案
+https://blog.csdn.net/wabiaozia/article/details/75092623
+## 无模板页面抽出公共部分之SSI方案--如何找到源文件
 https://www.cnblogs.com/ITGirl00/archive/2013/02/23/SSI.html
 https://www.cnblogs.com/NeverCtrl-C/p/8191920.html
 https://blog.csdn.net/fgsgsgfgsg/article/details/46860049
+
+# AOP
+## 全局的错误处理方式
+* 功能：定制错误页面，根据ajax或浏览器页面请求返回不同的结果
+* ajax请求错误：http://localhost/testAjax.html
+* demo返回错误页面：http://localhost/demo/testException
+* demo返回错误页面：参数封装错误http://localhost/demo/testException2?date=20180830
+* [参考文章](https://www.cnblogs.com/okokabcd/p/9175797.html)
+
+## Web访问日志记录
+* 功能： 利用AOP技术，在所有的controller请求增加切面，记录
+* 缺陷：抛出异常时，如何处理？
+* [参考文章](https://my.oschina.net/sdlvzg/blog/1517729)
+
+## 日志输出
+* 功能：动态修改日志级别——actuator模块
+* 功能：日志分级别输出，日志详细设置说明
+* 功能：彩色日志
+* 实现：见logback-spring.xml、动态修改见：
+* 参考文章 [logback 基础使用篇](https://www.cnblogs.com/lixuwu/p/5804793.html)
+* 参考文章 [动态修改日志级别](http://www.cnblogs.com/heqiyoujing/p/9470752.html)
+* 参考文章 [动态修改日志级别](https://www.cnblogs.com/ncyhl/p/7553067.html)
+* 参考文章 [Spring Boot 1.5.x新特性：动态修改日志级别](https://blog.csdn.net/dyc87112/article/details/54866244/)
+   设置 management.security.enabled: false
+    查看包com.reven 的日志级别，get请求： http://localhost/loggers/com.reven
+    更改日志级别，post请求：http://localhost/loggers/com.reven,body：{"configuredLevel": "DEBUG"}
+
+# 缓存使用
+* 功能：本地缓存使用
+* 功能：多级缓存示例caffine+redis，部分场景可以通过redis监听功能刷新本地缓存
+* 功能：spring cache使用示例，使用规范：cacheName使用当前系统名字作为前缀之一，key值使用SpEL表达式包含targetClass
+* 缓存场景：缓存的使用最重要的是场景
+* 如何使用demo：https://www.cnblogs.com/xiaoping1993/p/7761123.html

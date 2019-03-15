@@ -19,8 +19,8 @@ public class GzipPcompress {
 	public void gzPressFile(String sourcePathAndName, String pressPathAndName) {
 		try {
 			FileInputStream fileInputStream = new FileInputStream(sourcePathAndName);
-			GZIPInputStream Zin = new GZIPInputStream(fileInputStream);
-			GzipPcompress.extractFile(Zin, pressPathAndName);
+			GZIPInputStream zin = new GZIPInputStream(fileInputStream);
+			GzipPcompress.extractFile(zin, pressPathAndName);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

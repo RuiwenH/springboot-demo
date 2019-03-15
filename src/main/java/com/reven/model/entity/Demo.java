@@ -2,8 +2,16 @@ package com.reven.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+/**
+ * @author reven
+ */
 @Table(name = "t_demo")
 public class Demo extends BaseEntity implements Serializable {
     /**
@@ -39,6 +47,21 @@ public class Demo extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
+    
+    public Demo() {
+        super();
+    }
+
+    public Demo(Integer id, String name, Date date, Date timestamp, String key, String acDd) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.timestamp = timestamp;
+        this.key = key;
+        this.acDd = acDd;
+    }
+
     public Integer getId() {
         return id;
     }
