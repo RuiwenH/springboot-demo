@@ -31,6 +31,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
@@ -639,7 +640,7 @@ public class ExcelUtil {
         // 1、 获取工作表的有效数据行数
         int realRows = 0;
         int[] realIndex = new int[sheet.getLastRowNum()];
-        for (int i = beginRow + 1; i < sheet.getLastRowNum(); i++) {
+        for (int i = beginRow + 1; i <= sheet.getLastRowNum(); i++) {
             Row row = sheet.getRow(beginRow);
             int nullCols = 0;
             for (int j = 0; j < row.getPhysicalNumberOfCells(); j++) {
@@ -708,7 +709,8 @@ public class ExcelUtil {
                 String enNormalName = entry.getKey();
                 // 根据中文字段名获取列号
                 int col = colMap.get(cnNormalName);
-
+                //Cannot get a STRING value from a NUMERIC cell,解决方法是在读取数据前设置cell的type
+                sheet.getRow(realIndex[i]).getCell(col).setCellType(CellType.STRING);
                 // 获取当前单元格中的内容
                 String content = sheet.getRow(realIndex[i]).getCell(col).getStringCellValue().trim();
                 // 给对象赋值

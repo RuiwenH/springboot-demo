@@ -78,7 +78,6 @@ public class DemoController extends BaseController {
         filedMap.put("id", "ID");
         filedMap.put("name", "姓名");
         filedMap.put("date", "日期");
-        filedMap.put("flag", "上班中");
         filedMap.put("enName", "英文名");
         filedMap.put("numFloat", "float");
         filedMap.put("numDouble", "double");
