@@ -157,3 +157,10 @@ https://blog.csdn.net/fgsgsgfgsg/article/details/46860049
 * 功能：spring cache使用示例，使用规范：cacheName使用当前系统名字作为前缀之一，key值使用SpEL表达式包含targetClass
 * 缓存场景：缓存的使用最重要的是场景
 * 如何使用demo：https://www.cnblogs.com/xiaoping1993/p/7761123.html
+
+
+# 通用流水号生成（通用单据编号生成）
+* 功能：例如生成流水号： 前缀+YYYY+序号，order_2018080001、order_2018080001
+* 功能：可以指定前缀，是否使用年份、月份、日期为流水号的一部分。
+* demo：http://localhost:8082/serial/number/getSn
+* demo2：http://localhost:8082/serial/number/getSnByDate
