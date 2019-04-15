@@ -1,5 +1,8 @@
 # SpringBoot Demo
 SpringBoot 常用功能演示及使用规范，最佳实践。
+功能清单：
+* 数据源
+* xss实践
 
 ## 目录结构规范
 * 参考  https://blog.csdn.net/ubuntu64fan/article/details/80555915
@@ -164,3 +167,6 @@ https://blog.csdn.net/fgsgsgfgsg/article/details/46860049
 * 功能：可以指定前缀，是否使用年份、月份、日期为流水号的一部分。
 * demo：http://localhost:8082/serial/number/getSn
 * demo2：http://localhost:8082/serial/number/getSnByDate
+
+# xss
+* 参考文章https://blog.csdn.net/xingbaozhen1210/article/details/78860079

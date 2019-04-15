@@ -19,6 +19,7 @@ spring.mvc:
   view.suffix: .html  # 给返回的页面添加后缀名
   view.prefix: classpath:/templates/  # 定位模板的目录
   static-path-pattern: /static/** # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  
 
 
 # 数据库配置
@@ -66,6 +67,20 @@ mybatis:
 spring.cache:
   # demo-是系统名称或规定使用的模块名称之类，注意保证不同系统之间名字的唯一
     cache-names: demo-cache10min,demo-cache1Hour,demo-cache1Day
+
+# 是否开启xss防护
+xss.on: true 
+# 不过滤的url清单用逗号隔开
+xss.url.excludes: /favicon.ico,/images/*,/img/*,/js/*,/css/*,/page/*,/style/*,/xss/excludeUrl
+
+
+
+
+
+
+
+
+
 
 ## 监控与管理
 management:
