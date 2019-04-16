@@ -23,7 +23,11 @@ public enum ResResultCode {
     /**
      * 服务器内部错误
      */
-    INTERNAL_SERVER_ERROR(500);
+    INTERNAL_SERVER_ERROR(500), 
+    /**   
+     * @Fields UNAUTHORIZED : 未认证（签名错误）
+     */  
+    UNAUTHORIZED(401);
 
     public int code;
 

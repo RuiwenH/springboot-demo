@@ -32,8 +32,8 @@ public class DemoJob {
 
     }
 
-//    @Scheduled(cron = "0 0/2 * * * *")
-//  @Scheduled(cron = "${job.cron-expression.demo}")
+//    @Scheduled(cron = "0/5 * * * * *")
+//  @Scheduled(cron = "${noset-job.cron-expression.demo:#{'0/5 * * * * *'}}")
   @Async
     public void cronDemo2() throws InterruptedException {
         // 获取当前时间
