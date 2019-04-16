@@ -6,7 +6,7 @@
 #以空格的缩进来控制层级关系；
 #其他： 建议使用跟项目相关的名称作为文件名，避免运维覆盖
 
-profile: pro
+spring.profiles.active: pro
 
 server.port: 80
 
