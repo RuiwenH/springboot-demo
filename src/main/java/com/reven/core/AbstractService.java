@@ -10,14 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Condition;
 
 /**
- * 基于通用MyBatis Mapper插件的Service接口的实现
+ * @ClassName:  AbstractService   
+ * @Description:基于通用MyBatis Mapper插件的Service接口的实现
+ * @author reven
+ * @date   2018年8月28日
+ * @param <T>
  */
 public abstract class AbstractService<T> implements IBaseService<T> {
 
 	@Autowired
 	protected Mapper<T> mapper;
 
-	private Class<T> modelClass; // 当前泛型真实类型的Class
+	private Class<T> modelClass; 
 
 	@SuppressWarnings("unchecked")
 	public AbstractService() {
