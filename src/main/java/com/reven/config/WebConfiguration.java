@@ -29,6 +29,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Value("${xss.isclean}")
     private String xssIsClean;
 
+    
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 下载上传的文件
