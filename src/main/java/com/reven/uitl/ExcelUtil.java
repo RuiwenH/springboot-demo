@@ -46,6 +46,8 @@ import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.reven.core.ServiceException;
 
@@ -56,11 +58,13 @@ import com.reven.core.ServiceException;
  * @param <T>
  */
 public class ExcelUtil {
-//    private static Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(ExcelUtil.class);
     // 2007 版本以上 最大支持1048576行
-    public final static String EXCEl_FILE_2007 = "2007";
+    public final static String EXCEL_FILE_2007 = "2007";
     // 2003 版本 最大支持65536 行
     public final static String EXCEL_FILE_2003 = "2003";
+    
+   private static Pattern NUM_PATTERN = Pattern.compile("^//d+(//.//d+)?$");
 
     /**
      * @Title: responseExcel
@@ -81,13 +85,16 @@ public class ExcelUtil {
         }
         // 设置response头信息
         response.reset();
-        response.setContentType("application/vnd.ms-Excel"); // 改成输出Excel文件
-        String downloadFileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");// 设置编码
-        response.setHeader("Content-disposition", "attachment; filename=" + downloadFileName + ".xlsx");
+        response.setContentType("application/msexcel; charset=GBK"); // 改成输出Excel文件
+        fileName += ".xlsx";
+        //去除空格
+        fileName=fileName.replaceAll(" ", "");
+        String downloadFileName = new String(fileName.getBytes("GBK"), "iso-8859-1");// 设置编码
+        response.setHeader("Content-disposition", "attachment; filename=" + downloadFileName);
 
         // 创建工作簿并发送到浏览器
         OutputStream out = response.getOutputStream();
-        exportExcel(sheetName, sheetSize, list, fieldMap, out, EXCEl_FILE_2007);
+        exportExcel(sheetName, sheetSize, list, fieldMap, out, EXCEL_FILE_2007);
 
     }
 
@@ -116,7 +123,7 @@ public class ExcelUtil {
             sheetSize = 65535;
         }
 
-        if (StringUtils.isEmpty(version) || EXCEl_FILE_2007.equals(version.trim())) {
+        if (StringUtils.isEmpty(version) || EXCEL_FILE_2007.equals(version.trim())) {
             exportExcel2007(sheetName, sheetSize, list, fieldMap, out, "yyyy-MM-dd HH:mm:ss");
         } else {
             exportExcel2003(sheetName, sheetSize, list, fieldMap, out, "yyyy-MM-dd HH:mm:ss");
@@ -182,7 +189,7 @@ public class ExcelUtil {
             styleData.setFont(font2);
 
             // 1.计算一共有多少个工作表
-            double sheetNum = Math.ceil(list.size() / new Integer(sheetSize).doubleValue());
+            double sheetNum = Math.ceil(list.size() / sheetSize.doubleValue());
 
             // 2.创建相应的工作表，并向其中填充数据
             for (int i = 0; i < sheetNum; i++) {
@@ -241,7 +248,6 @@ public class ExcelUtil {
         int rowIndex = 0;
         T t;
         XSSFRichTextString richString;
-        Pattern p = Pattern.compile("^//d+(//.//d+)?$");
         Matcher matcher;
         XSSFCell cell;
         Object value;
@@ -284,7 +290,7 @@ public class ExcelUtil {
                 }
 
                 if (textValue != null) {
-                    matcher = p.matcher(textValue);
+                    matcher = NUM_PATTERN.matcher(textValue);
                     if (matcher.matches()) {
                         // 是数字当作double处理
                         cell.setCellValue(Double.parseDouble(textValue));
@@ -324,12 +330,13 @@ public class ExcelUtil {
             HSSFCellStyle styleHead = workbook.createCellStyle();
             // 设置这些样式
             styleHead.setFillForegroundColor(HSSFColor.GREY_50_PERCENT.index);
-            styleHead.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-            styleHead.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-            styleHead.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-            styleHead.setBorderRight(HSSFCellStyle.BORDER_THIN);
-            styleHead.setBorderTop(HSSFCellStyle.BORDER_THIN);
-            styleHead.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+            styleHead.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            styleHead.setBorderBottom(BorderStyle.THIN);
+            styleHead.setBorderLeft(BorderStyle.THIN);
+            styleHead.setBorderRight(BorderStyle.THIN);
+            styleHead.setBorderTop(BorderStyle.THIN);
+            styleHead.setAlignment(HorizontalAlignment.CENTER);
+            styleHead.setVerticalAlignment(VerticalAlignment.CENTER);
             // 生成一个字体
             HSSFFont font = workbook.createFont();
             font.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
@@ -341,13 +348,14 @@ public class ExcelUtil {
             // 生成并设置另一个样式
             HSSFCellStyle styleData = workbook.createCellStyle();
             styleData.setFillForegroundColor(HSSFColor.WHITE.index);
-            styleData.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-            styleData.setBorderBottom(HSSFCellStyle.BORDER_THIN);
-            styleData.setBorderLeft(HSSFCellStyle.BORDER_THIN);
-            styleData.setBorderRight(HSSFCellStyle.BORDER_THIN);
-            styleData.setBorderTop(HSSFCellStyle.BORDER_THIN);
-            styleData.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-            styleData.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+//            styleData.setFillForegroundColor(new XSSFColor(java.awt.Color.WHITE));
+            styleData.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            styleData.setBorderBottom(BorderStyle.THIN);
+            styleData.setBorderLeft(BorderStyle.THIN);
+            styleData.setBorderRight(BorderStyle.THIN);
+            styleData.setBorderTop(BorderStyle.THIN);
+            styleData.setAlignment(HorizontalAlignment.CENTER);
+            styleData.setVerticalAlignment(VerticalAlignment.CENTER);
             // 生成另一个字体
             HSSFFont font2 = workbook.createFont();
             font2.setBoldweight(HSSFFont.BOLDWEIGHT_NORMAL);
@@ -414,7 +422,7 @@ public class ExcelUtil {
         int rowIndex = 0;
         T t;
         HSSFRichTextString richString;
-        Pattern p = Pattern.compile("^//d+(//.//d+)?$");
+        
         Matcher matcher;
         HSSFCell cell;
         Object value;
@@ -457,7 +465,7 @@ public class ExcelUtil {
                 }
 
                 if (textValue != null) {
-                    matcher = p.matcher(textValue);
+                    matcher = NUM_PATTERN.matcher(textValue);
                     if (matcher.matches()) {
                         // 是数字当作double处理
                         cell.setCellValue(Double.parseDouble(textValue));
@@ -487,6 +495,7 @@ public class ExcelUtil {
             field.setAccessible(true);
             value = field.get(o);
         }
+
         if (value == null) {
             PropertyDescriptor pd = new PropertyDescriptor(fieldName, o.getClass());
             Method readMethod = pd.getReadMethod();
@@ -615,16 +624,16 @@ public class ExcelUtil {
         }
     }
 
-    /**
-     * @MethodName : excelToList
-     * @Description : 将Excel转化为List
+    /**   
+     * 将Excel转化为List
      * @param originalFilename 文件的原始名，推荐使用file.getOriginalFilename()
-     * @param in               ：承载着Excel的输入流
-     * @param sheetIndex       ：要导入的工作表序号
-     * @param entityClass      ：List中对象的类型（Excel中的每一行都要转化为该类型的对象）
-     * @param fieldMap         ：Excel中的中文列头和类的英文属性的对应关系Map,key=英文属性名称，value=中文列头
-     * @return ：List
-     * @throws Exception
+     * @param in 承载着Excel的输入流
+     * @param sheetIndex 要导入的工作表序号
+     * @param beginRow 数据开始的行号（含表头）
+     * @param entityClass List中对象的类型（Excel中的每一行都要转化为该类型的对象）
+     * @param fieldMap Excel中的中文列头和类的英文属性的对应关系Map,key=英文属性名称，value=中文列头
+     * @return
+     * @throws Exception      
      */
     public static <T> List<T> excelToList(String originalFilename, InputStream in, int sheetIndex, int beginRow,
             Class<T> entityClass, Map<String, String> fieldMap) throws Exception {
@@ -645,6 +654,7 @@ public class ExcelUtil {
             int nullCols = 0;
             for (int j = 0; j < row.getPhysicalNumberOfCells(); j++) {
                 Cell currentCell = row.getCell(j);
+                currentCell.setCellType(CellType.STRING);
                 if (currentCell == null || "".equals(currentCell.getStringCellValue())) {
                     nullCols++;
                 }
@@ -664,19 +674,19 @@ public class ExcelUtil {
 
         // 2、读取表头
         Row firstRow = sheet.getRow(beginRow);
-        String[] ExcelFieldNames = new String[firstRow.getPhysicalNumberOfCells()];
+        String[] excelFieldNames = new String[firstRow.getPhysicalNumberOfCells()];
 
         // 获取Excel中的列名
-        for (int i = 0; i < ExcelFieldNames.length; i++) {
-            ExcelFieldNames[i] = firstRow.getCell(i).getStringCellValue().trim();
+        for (int i = 0; i < excelFieldNames.length; i++) {
+            excelFieldNames[i] = firstRow.getCell(i).getStringCellValue().trim();
         }
 
         // 判断需要的字段在Excel中是否都存在
         boolean isExist = true;
-        List<String> ExcelFieldList = Arrays.asList(ExcelFieldNames);
+        List<String> excelFieldList = Arrays.asList(excelFieldNames);
         StringBuffer notExitField = new StringBuffer();
         for (String cnName : fieldMap.values()) {
-            if (!ExcelFieldList.contains(cnName)) {
+            if (!excelFieldList.contains(cnName)) {
                 isExist = false;
                 notExitField.append("[");
                 notExitField.append(cnName);
@@ -692,10 +702,10 @@ public class ExcelUtil {
 
         // 3、 将列名和列号放入Map中,这样通过列名就可以拿到列号
         LinkedHashMap<String, Integer> colMap = new LinkedHashMap<String, Integer>();
-        for (int i = 0; i < ExcelFieldNames.length; i++) {
-            colMap.put(ExcelFieldNames[i], i);
+        for (int i = 0; i < excelFieldNames.length; i++) {
+            colMap.put(excelFieldNames[i], i);
         }
-
+        
         // 将sheet转换为list
         for (int i = 0; i < realRows; i++) {
             // 新建要转换的对象
@@ -709,12 +719,22 @@ public class ExcelUtil {
                 String enNormalName = entry.getKey();
                 // 根据中文字段名获取列号
                 int col = colMap.get(cnNormalName);
-                //Cannot get a STRING value from a NUMERIC cell,解决方法是在读取数据前设置cell的type
-                sheet.getRow(realIndex[i]).getCell(col).setCellType(CellType.STRING);
-                // 获取当前单元格中的内容
-                String content = sheet.getRow(realIndex[i]).getCell(col).getStringCellValue().trim();
-                // 给对象赋值
-                setFieldValueByName(enNormalName, content, entity, sdf);
+
+                if (sheet.getRow(realIndex[i]) != null) {
+                    // Cannot get a STRING value from a NUMERIC cell,解决方法是在读取数据前设置cell的type
+                    if (sheet.getRow(realIndex[i]).getCell(col) != null) {
+                        sheet.getRow(realIndex[i]).getCell(col).setCellType(CellType.STRING);
+                        // 获取当前单元格中的内容
+                        String content = sheet.getRow(realIndex[i]).getCell(col).getStringCellValue();
+                        if (content != null) {
+                            content = content.trim();
+                            // 给对象赋值
+                            if(StringUtils.isNotEmpty(content)) {
+                                setFieldValueByName(enNormalName, content, entity, sdf);
+                            }
+                        }
+                    }
+                }
             }
 
             resultList.add(entity);
@@ -733,6 +753,9 @@ public class ExcelUtil {
         } else if (originalFilename.endsWith("xlsx")) {
             // 2007
             workbook = new XSSFWorkbook(is);
+        }
+        if(workbook==null) {
+            throw new ServiceException("只支持xls、xlsx");
         }
         return workbook;
     }

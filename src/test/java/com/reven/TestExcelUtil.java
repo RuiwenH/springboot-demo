@@ -36,7 +36,7 @@ public class TestExcelUtil {
         filedMap.put("numLong", "long");
 
         ExcelUtil.exportExcel("用户导出", 500, list, filedMap, new FileOutputStream("D:/test7.xlsx"),
-                ExcelUtil.EXCEl_FILE_2007);
+                ExcelUtil.EXCEL_FILE_2007);
 //        ExcelUtil.exportExcel("用户导出", 500, list, filedMap, new FileOutputStream("D:/test3.xls"),
 //                ExcelUtil.EXCEL_FILE_2003);
     }
