@@ -6,7 +6,7 @@ package com.reven.core;
  * @author reven
  * @date   2018年8月28日
  */
-public class ServiceException extends RuntimeException {
+public class ServiceException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 

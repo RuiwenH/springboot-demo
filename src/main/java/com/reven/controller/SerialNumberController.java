@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reven.controller.common.ResResult;
+import com.reven.core.ServiceException;
 import com.reven.service.ISerialNumberService;
 
 
@@ -25,13 +26,13 @@ public class SerialNumberController {
     private ISerialNumberService serialNumberService;
 
     @RequestMapping("/getSn")
-    public ResResult getSn() {
+    public ResResult getSn() throws ServiceException {
         String sn=serialNumberService.newSerialByCode("model_order");
         return ResResult.success(sn);
     }
 
     @RequestMapping("/getSnByDate")
-    public ResResult getSnByDate() {
+    public ResResult getSnByDate() throws ServiceException {
         String sn=serialNumberService.newSerialByCodeAndDate("model_order",DateUtils.addDays(new Date(), -30));
         return ResResult.success(sn);
     }
