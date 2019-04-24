@@ -14,6 +14,9 @@ SpringBoot 常用功能演示及使用规范，最佳实践。
 * 定时任务
 * springBoot的监控和管理
 * xss实践
+*
+*
+* logback不同业务的日志打印到不同文件
 
 ## 目录结构规范
 * 参考  https://blog.csdn.net/ubuntu64fan/article/details/80555915
