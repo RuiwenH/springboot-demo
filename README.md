@@ -128,11 +128,61 @@ https://blog.csdn.net/zhaoyahui_666/article/details/78835128
 * 代码清单：XssFilter.java、XssHttpServletRequestWrapper.java、JsoupUtil.java
 * 配置：WebConfiguration.java 配置XssFilter， application.yml配置见xss.*
 * 测试场景：get请求、post请求、文件上传、
+* 测试页面：http://localhost:8082/static/page/test_xss.html
 
 ## sql注入
 
 ## CSRF攻击
 
+## logback不同业务的日志打印到不同文件
+* 参考文档：https://blog.csdn.net/mggwct/article/details/77718122
+* 关键配置：定义一个logger ，通过<appender-ref ref="xssAppender" />指定appender
+
+```
+<logger name="INFO_XSS" additivity="false" level="INFO">
+    <appender-ref ref="xssAppender" />
+</logger>
+<!--不同业务逻辑的日志打印到不同文件 -->
+<appender name="xssAppender"
+    class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- 正在记录的日志文档的路径及文档名 -->
+    <file>${log.path}/xss.log</file>
+    <append>true</append>
+    <!--日志文档输出格式 -->
+    <encoder>
+        <pattern>${file.log.pattern}</pattern>
+        <charset>UTF-8</charset>
+    </encoder>
+    <!-- 日志记录器的滚动策略，按日期，按大小记录 https://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy -->
+    <rollingPolicy
+        class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <!-- 每天日志归档路径以及格式 -->
+        <fileNamePattern>${log.path}/xss-%d{yyyy-MM-dd}.%i.log
+        </fileNamePattern>
+        <timeBasedFileNamingAndTriggeringPolicy
+            class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+            <!-- 避免单个日志过大，不方便打开或下载等 -->
+            <maxFileSize>50MB</maxFileSize>
+        </timeBasedFileNamingAndTriggeringPolicy>
+        <!--日志文档保留个数，如果每天生成一个日志文件，根据日志归档%d{yyyy-MM-dd}的格式，将会保留90天 -->
+        <maxHistory>90</maxHistory>
+        <!-- 如果该appender的总日志大小超过5GB将会删除最久的日志文件 -->
+        <totalSizeCap>5GB</totalSizeCap>
+        <!-- 如果保存日志90天（安全规范），可以将totalSizeCap、maxFileSize取消设置，fileNamePattern日期格式为%d{yyyy-MM-dd} -->
+    </rollingPolicy>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <level>INFO</level>
+        <onMatch>ACCEPT</onMatch>
+        <onMismatch>DENY</onMismatch>
+    </filter>
+</appender>
+```
+* 使用： 
+
+```
+private static Logger loggerXss = LoggerFactory.getLogger("INFO_XSS");
+loggerXss.info(url);
+```
 
 
 

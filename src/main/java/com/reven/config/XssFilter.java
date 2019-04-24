@@ -29,6 +29,7 @@ import com.reven.uitl.XssHttpServletRequestWrapper;
  */
 public class XssFilter implements Filter {
     private static Logger logger = LoggerFactory.getLogger(XssFilter.class);
+    private static Logger loggerXss = LoggerFactory.getLogger("INFO_XSS");
 
     public List<String> excludes = new ArrayList<>();
     private boolean iscleanXss = true;
@@ -60,6 +61,7 @@ public class XssFilter implements Filter {
         }
 
         String url = request.getServletPath();
+        loggerXss.info(url);
         for (String pattern : excludes) {
             Pattern p = Pattern.compile("^" + pattern);
             Matcher m = p.matcher(url);
