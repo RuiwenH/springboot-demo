@@ -6,7 +6,6 @@
 # 属性和值也是大小写敏感
 # 数据格式为k:(空格)v：表示一对键值对（空格必须有）；
 # 以空格的缩进来控制层级关系；
-spring.profiles.active: pro
 
 server.port: 8082
 
