@@ -131,8 +131,7 @@ public class ExcelUtil {
             OutputStream out, String version) throws ServiceException, IllegalAccessException,
             InvocationTargetException, IntrospectionException, IOException {
         if (list == null || list.isEmpty()) {
-            /**throw new ServiceException("NO_DATA", "数据源中没有任何数据");*/
-            throw new ServiceException("数据源中没有任何数据");
+            throw new ServiceException("数据源中没有任何数据", "NO_DATA");
         }
 
         if (sheetSize > 65535 || sheetSize < 1) {
@@ -654,8 +653,7 @@ public class ExcelUtil {
                 field.set(o, fieldValue);
             }
         } else {
-            /**throw new ServiceException("NOT_EXIST_FIELD", o.getClass().getSimpleName() + "类不存在字段名 " + fieldName);*/
-            throw new ServiceException(o.getClass().getSimpleName() + "类不存在字段名 " + fieldName);
+            throw new ServiceException(o.getClass().getSimpleName() + "类不存在字段名 " + fieldName, "NOT_EXIST_FIELD");
         }
     }
 
@@ -755,8 +753,7 @@ public class ExcelUtil {
 
         // 如果有列名不存在，则抛出异常，提示错误
         if (!isExist) {
-            /**throw new ServiceException("ERROR_FIELD", "Excel中缺少必要的字段，或字段名称有误");*/
-            throw new ServiceException("Excel中缺少必要的字段" + notExitField.toString());
+            throw new ServiceException("Excel中缺少必要的字段" + notExitField.toString(), "ERROR_FIELD");
         }
 
         // 3、 将列名和列号放入Map中,这样通过列名就可以拿到列号
@@ -785,8 +782,7 @@ public class ExcelUtil {
         }
         // 如果Excel中没有数据则提示错误
         if (realRows <= 0) {
-            /**throw new ServiceException("NO_DATA", "Excel文件中没有任何数据");*/
-            throw new ServiceException("Excel文件中没有任何数据");
+            throw new ServiceException("Excel文件中没有任何数据", "NO_DATA");
         }
         return realRows;
     }
@@ -804,7 +800,7 @@ public class ExcelUtil {
             workbook = new XSSFWorkbook(is);
         }
         if (workbook == null) {
-            throw new ServiceException("只支持xls、xlsx");
+            throw new ServiceException("只支持xls、xlsx", "unsupport");
         }
         return workbook;
     }

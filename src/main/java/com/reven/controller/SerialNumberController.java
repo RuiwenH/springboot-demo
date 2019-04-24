@@ -26,15 +26,23 @@ public class SerialNumberController {
     private ISerialNumberService serialNumberService;
 
     @RequestMapping("/getSn")
-    public ResResult getSn() throws ServiceException {
-        String sn=serialNumberService.newSerialByCode("model_order");
-        return ResResult.success(sn);
+    public ResResult getSn() {
+        try {
+            String sn=serialNumberService.newSerialByCode("model_order");
+            return ResResult.success(sn);
+        } catch (ServiceException e) {
+            return ResResult.fail(e.getMessage());
+        }
     }
 
     @RequestMapping("/getSnByDate")
-    public ResResult getSnByDate() throws ServiceException {
-        String sn=serialNumberService.newSerialByCodeAndDate("model_order",DateUtils.addDays(new Date(), -30));
-        return ResResult.success(sn);
+    public ResResult getSnByDate()  {
+        try {
+            String sn=serialNumberService.newSerialByCodeAndDate("model_order",DateUtils.addDays(new Date(), -30));
+            return ResResult.success(sn);
+        } catch (ServiceException e) {
+            return ResResult.fail(e.getMessage());
+        }
     }
  
 }

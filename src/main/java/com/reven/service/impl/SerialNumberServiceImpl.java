@@ -45,8 +45,7 @@ public class SerialNumberServiceImpl extends AbstractService<SerialNumber> imple
         number = generatePrepareSerialNumbers(moduleCode, year, month, day);
 
         if (StringUtils.isEmpty(number)) {
-//			throw new ServiceException("error", "没有生成任何序列号，请检查是否在数据库中设置相应类型");
-            throw new ServiceException("没有生成任何序列号，请检查是否在数据库中设置相应类型");
+            throw new ServiceException("没有生成任何序列号生成失败","empty");
         }
         return number;
     }
@@ -77,8 +76,7 @@ public class SerialNumberServiceImpl extends AbstractService<SerialNumber> imple
         }
 
         if (rule == null) {
-//                throw new ServiceException("not_setting", "没有相应的序列号规则设置");
-            throw new ServiceException("没有模块编码=" + moduleCode + "，相应的序列号规则设置");
+            throw new ServiceException("没有模块编码=" + moduleCode + "，相应的序列号规则设置","not_setting");
         }
 
         int currentSerial = 0;
@@ -107,8 +105,7 @@ public class SerialNumberServiceImpl extends AbstractService<SerialNumber> imple
         int serialLength = rule.getSerialLength(); // 存储当前最大值
         currentSerial = currentSerial + 1;
         if ((currentSerial + "").length() > serialLength) {
-            // throw new ServiceException("length_error", "流水号超过长度,请考虑增加长度或者重置流水号");
-            throw new ServiceException("流水号超过长度,请考虑增加长度或者重置流水号");
+            throw new ServiceException("流水号超过长度,请考虑增加长度或者重置流水号","length_error");
             // currentSerial = 1;// 如果动态数字长度大于模板中的长度 例：模板CF000 currentSerialInt
             // 1000,重置为1
             // 更新数据，重置currentSerial为1
