@@ -98,7 +98,7 @@ public class JsoupUtil {
     public static void main(String[] args) throws IOException {
         String text = "<a href=\"http://www.baidu.com/a\" onclick=\"alert(1);\">sss</a><script>alert(0);</script>sss   ";
         System.out.println((text) + "/end");
-        System.out.println(clean(text) + "/end");
+        System.out.println(JsoupUtil.clean(text) + "/end");
 
         String s = "<p><a href=\"www.test.xhtml\">test</a><a title=\"哈哈哈\" href=\"/aaaa.bbv.com\" href1=\"www.baidu.com\" href2=\"www.baidu.com\" onclick=\"click()\"></a><script>ss</script><img script=\"xxx\" "
                 + "onclick=function  src=\"https://www.xxx.png\" title=\"\" width=\"100%\" alt=\"\"/>"
@@ -107,7 +107,7 @@ public class JsoupUtil {
                 + "<span style=\"border: 1px solid rgb(0, 0, 0);\">撒地方</span></em></p><p><span style=\"color: rgb(255, 0, 0);\">似懂非懂</span><br/></p>"
                 + "<p><span style=\"color: rgb(255, 0, 0);\"><strong>撒地方</strong></span></p><p><span style=\"color: rgb(221, 217, 195);\"><br/></span></p>"
                 + "<p style=\"text-align: center;\"><span style=\"color: rgb(0, 0, 0); font-size: 20px;\">撒旦法</span></p><p><br/></p>";
-        logger.info(clean(s));
+        System.out.println(JsoupUtil.clean(s));
 
     }
 }

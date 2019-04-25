@@ -15,4 +15,8 @@ public interface IDemoService extends IBaseService<Demo> {
 
 	PageInfo<Demo> findAll(Integer page, Integer size);
 
+    PageInfo<Demo> find(Integer page, Integer size, String orderBy);
+
+    PageInfo<Demo> findMy(Integer page, Integer size, String orderBy);
+
 }

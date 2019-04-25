@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.reven.controller.common.BaseController;
 import com.reven.controller.common.JxlsExcelView;
@@ -153,12 +154,8 @@ public class DemoController extends BaseController {
     @GetMapping("/list")
     public ResResult list(@RequestParam(defaultValue = "0") Integer page,
             @RequestParam(defaultValue = "10") Integer size) {
-        logger.info("ServerIp={}", getServerIp());
-        logger.error("UserIp={}", getCliectIp());
-        logger.warn("UserIp={}", getCliectIp());
-        logger.info("UserIp={}", getCliectIp());
-        logger.debug("UserIp={}", getCliectIp());
-        logger.trace("UserIp={}", getCliectIp());
+        PageHelper.startPage(page, size);
+        PageHelper.orderBy("name desc");
         PageInfo<Demo> pageInfo = demoService.findAll(page, size);
         return ResResult.success(pageInfo);
     }

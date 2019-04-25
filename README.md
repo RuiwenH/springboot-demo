@@ -14,7 +14,7 @@ SpringBoot 常用功能演示及使用规范，最佳实践。
 * 定时任务
 * springBoot的监控和管理
 * xss实践
-*
+* sql注入
 *
 * logback不同业务的日志打印到不同文件
 
@@ -134,6 +134,10 @@ https://blog.csdn.net/zhaoyahui_666/article/details/78835128
 * 测试页面：http://localhost:8082/static/page/test_xss.html
 
 ## sql注入
+* 参考链接：https://www.evernote.com/l/AKrAUxJXmG1E2pjc0fQqId7VsYUvTcUhSfQ/
+* sql编写使用预编译的方式。在无法避免使用预编译的地方（order by 、动态表名等），使用sql注入字符串过滤工具类过滤参数
+* 工具类：SqlInjectionUtil.java
+* 测试入口：SqlInjectionController.java
 
 ## CSRF攻击
 

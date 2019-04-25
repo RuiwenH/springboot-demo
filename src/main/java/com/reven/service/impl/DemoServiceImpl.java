@@ -15,6 +15,7 @@ import com.reven.core.AbstractService;
 import com.reven.dao.DemoMapper;
 import com.reven.model.entity.Demo;
 import com.reven.service.IDemoService;
+import com.reven.uitl.SqlInjectionUtil;
 
 /**
  * @author reven
@@ -41,6 +42,21 @@ public class DemoServiceImpl extends AbstractService<Demo> implements IDemoServi
         List<Demo> list = super.findAll();
         PageInfo<Demo> pageInfo = new PageInfo<Demo>(list);
         return pageInfo;
+    }
+    
+    @Override
+    public PageInfo<Demo> find(Integer page, Integer size,String orderBy) {
+        PageHelper.startPage(page, size);
+        PageHelper.orderBy(orderBy);
+        List<Demo> list = super.findAll();
+        return new PageInfo<>(list);
+    }
+
+    @Override
+    public PageInfo<Demo> findMy(Integer page, Integer size, String orderBy) {
+        PageHelper.startPage(page, size);
+        List<Demo> list = demoMapper.findMy(SqlInjectionUtil.filter(orderBy));
+        return  new PageInfo<>(list);
     }
 
 }
