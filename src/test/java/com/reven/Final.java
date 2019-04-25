@@ -2,13 +2,13 @@ package com.reven;
 
 import java.lang.reflect.Field;
 
-public class FinalTest {
+public class Final {
     public final Integer info = 123;
     public final int a = 99;
 
     public static void main(String[] args)
             throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-        FinalTest util = new FinalTest();
+        Final util = new Final();
         Field field = util.getClass().getDeclaredField("info");
         field.setAccessible(true);
         field.set(util, 789);

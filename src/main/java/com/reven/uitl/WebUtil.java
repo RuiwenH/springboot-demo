@@ -24,13 +24,13 @@ public class WebUtil {
     public static String getCliectIp(HttpServletRequest request) {
         String ip = request.getHeader("x-forwarded-for");
         String unknown = "unknown";
-        if (ip == null || ip.trim() == "" || unknown.equalsIgnoreCase(ip)) {
+        if (ip == null || "".equals(ip.trim()) || unknown.equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
-        if (ip == null || ip.trim() == "" || unknown.equalsIgnoreCase(ip)) {
+        if (ip == null || "".equals(ip.trim()) || unknown.equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
-        if (ip == null || ip.trim() == "" || unknown.equalsIgnoreCase(ip)) {
+        if (ip == null || "".equals(ip.trim()) || unknown.equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
 

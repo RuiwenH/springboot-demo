@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -29,6 +31,7 @@ import com.reven.uitl.WebUtil;
  */
 public class BaseController {
 
+    private static Logger logger = LoggerFactory.getLogger(BaseController.class);
     private static final String DEFAULT_ENCODING = "UTF-8";
     private static final boolean DEFAULT_NOCACHE = true;
     public static final String TEXT_TYPE = "text/plain";
@@ -135,8 +138,8 @@ public class BaseController {
         try {
             InputStream inStream = this.getRequest().getInputStream();
             // 默认为json
-            BufferedReader in = new BufferedReader(new InputStreamReader(inStream, "UTF-8"));
-            StringBuffer stringBuffer = new StringBuffer();
+            BufferedReader in = new BufferedReader(new InputStreamReader(inStream, DEFAULT_ENCODING));
+            StringBuilder stringBuffer = new StringBuilder();
             String buffer = "";
             while (null != (buffer = (in.readLine()))) {
                 stringBuffer.append(buffer);
@@ -147,7 +150,7 @@ public class BaseController {
             }
             return JsonUtil.toMap(reqDoc);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         }
         return null;
     }

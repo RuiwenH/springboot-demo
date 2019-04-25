@@ -1,6 +1,6 @@
 package com.reven.cache;
  
-public class Test {
+public class TestCache {
  
 	public static void main(String[] args) throws InterruptedException {
 		LocalCache lcCache = new LocalCache();

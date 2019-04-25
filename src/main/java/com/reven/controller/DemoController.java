@@ -91,7 +91,7 @@ public class DemoController extends BaseController {
 
     @GetMapping("/testException")
     public ResResult testException() {
-        System.out.println(1 / 0);
+        Integer.parseInt("ss");
         return ResResult.success();
     }
 
@@ -162,23 +162,6 @@ public class DemoController extends BaseController {
 
     @RequestMapping(value = "/exportExcel")
     public ModelAndView export() {
-        Map<String, Object> model = new HashMap<>(4);
-        model.put("name", "Reven001");
-        model.put("age", 18);
-        // queryUser()为数据获取的方法
-        List<Demo> list = demoService.findAll();
-        if (list == null || list.size() == 0) {
-            // list为空，会报错
-            model.put("demoList", new ArrayList<Demo>(0));
-        } else {
-            model.put("demoList", list);
-        }
-        return new ModelAndView(new JxlsExcelView("static/excel/t_template.xls", "demo导出"), model);
-    }
-
-    @RequestMapping(value = "/echartData")
-    @ResponseBody
-    public ModelAndView echart() {
         Map<String, Object> model = new HashMap<>(4);
         model.put("name", "Reven001");
         model.put("age", 18);

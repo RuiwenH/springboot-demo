@@ -6,11 +6,11 @@ import java.util.List;
 /**
  * @author reven
  */
-public class JvmPrintGcTest {
+public class JvmPrintGc {
 	public static void main(String[] args) {
 	    printMemory();
 //		JvmPrintGcTest.test();
-		JvmPrintGcTest.oom();
+		JvmPrintGc.oom();
 		printMemory();
 		
 	}

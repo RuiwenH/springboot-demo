@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class DemoJob {
+    private String pattern = "yyyy-MM-dd HH:mm:ss";
+
     /**
      * 
      * 把系统时间改到从前，将无法触发。把系统时间还原也不行，需要重启。
@@ -25,10 +27,10 @@ public class DemoJob {
         // 获取当前时间
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out
-                .println("cronDemo，start 当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                .println("cronDemo，start 当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern(pattern)));
         Thread.sleep(1000*60*5);
         System.out
-        .println("cronDemo，end 当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        .println("cronDemo，end 当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern(pattern)));
 
     }
 
@@ -40,7 +42,7 @@ public class DemoJob {
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out.println(Thread.currentThread().getName());
         System.out
-                .println("cronDemo2，当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                .println("cronDemo2，当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern(pattern)));
     }
 
 //    @Scheduled(cron = "0/2 * * * * *")
@@ -52,7 +54,7 @@ public class DemoJob {
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out.println(Thread.currentThread().getName());
         System.out
-                .println("cronDemo3，当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                .println("cronDemo3，当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern(pattern)));
     }
 
 //    @Scheduled(initialDelay = 60000, fixedDelayString = "${job.cron-expression.fixedDelay}")
@@ -60,7 +62,7 @@ public class DemoJob {
         // 获取当前时间
         LocalDateTime localDateTime = LocalDateTime.now();
         System.out.println(
-                "fixedDelayDemo，当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                "fixedDelayDemo，当前时间为:" + localDateTime.format(DateTimeFormatter.ofPattern(pattern)));
     }
 
 }

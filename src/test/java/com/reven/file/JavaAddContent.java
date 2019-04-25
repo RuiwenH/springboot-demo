@@ -17,7 +17,7 @@ import java.io.RandomAccessFile;
  * @author huangruiwen
  * @date   2018年10月15日
  */
-public class JavaAddContentTest {
+public class JavaAddContent {
 
     /**
      * 追加使用BufferedWriter

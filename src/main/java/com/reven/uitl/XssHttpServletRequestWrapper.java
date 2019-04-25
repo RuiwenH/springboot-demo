@@ -31,6 +31,7 @@ import com.alibaba.fastjson.JSON;
  * @author
  */
 public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
+    private static final String UTF_8 = "UTF-8";
     private static Logger logger = LoggerFactory.getLogger(XssHttpServletRequestWrapper.class);
     private HttpServletRequest orgRequest = null;
     // 判断是否是上传，上传的请求则忽略
@@ -67,9 +68,9 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
         if (StringUtils.isNotBlank(value)) {
             try {
                 if (iscleanXss) {
-                    value = JsoupUtil.clean(URLDecoder.decode(value, "UTF-8"));
+                    value = JsoupUtil.clean(URLDecoder.decode(value, UTF_8));
                 } else {
-                    value = HtmlUtils.htmlEscape(URLDecoder.decode(value, "UTF-8"));
+                    value = HtmlUtils.htmlEscape(URLDecoder.decode(value, UTF_8));
                 }
             } catch (UnsupportedEncodingException e) {
                 logger.error(e.getMessage(), e);
@@ -89,9 +90,9 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
             for (int i = 0; i < arr.length; i++) {
                 try {
                     if (iscleanXss) {
-                        arr[i] = JsoupUtil.clean(URLDecoder.decode(arr[i], "UTF-8"));
+                        arr[i] = JsoupUtil.clean(URLDecoder.decode(arr[i], UTF_8));
                     } else {
-                        arr[i] = HtmlUtils.htmlEscape(URLDecoder.decode(arr[i], "UTF-8"));
+                        arr[i] = HtmlUtils.htmlEscape(URLDecoder.decode(arr[i], UTF_8));
                     }
                 } catch (UnsupportedEncodingException e) {
                     logger.error(e.getMessage(), e);
@@ -111,9 +112,9 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
                 if (arr[i] instanceof String) {
                     try {
                         if (iscleanXss) {
-                            arr[i] = JsoupUtil.clean(URLDecoder.decode(arr[i], "UTF-8"));
+                            arr[i] = JsoupUtil.clean(URLDecoder.decode(arr[i], UTF_8));
                         } else {
-                            arr[i] = HtmlUtils.htmlEscape(URLDecoder.decode(arr[i], "UTF-8"));
+                            arr[i] = HtmlUtils.htmlEscape(URLDecoder.decode(arr[i], UTF_8));
                         }
                     } catch (UnsupportedEncodingException e) {
                         logger.error(e.getMessage(), e);
@@ -137,9 +138,9 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
         if (StringUtils.isNotBlank(value)) {
             try {
                 if (iscleanXss) {
-                    value = JsoupUtil.clean(URLDecoder.decode(value, "UTF-8"));
+                    value = JsoupUtil.clean(URLDecoder.decode(value, UTF_8));
                 } else {
-                    value = HtmlUtils.htmlEscape(URLDecoder.decode(value, "UTF-8"));
+                    value = HtmlUtils.htmlEscape(URLDecoder.decode(value, UTF_8));
                 }
             } catch (UnsupportedEncodingException e) {
                 logger.error(e.getMessage(), e);
@@ -161,9 +162,9 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
                 Object val = map.get(key);
                 if (map.get(key) instanceof String) {
                     if (iscleanXss) {
-                        resultMap.put(key, JsoupUtil.clean(URLDecoder.decode(val.toString(), "UTF-8")));
+                        resultMap.put(key, JsoupUtil.clean(URLDecoder.decode(val.toString(), UTF_8)));
                     } else {
-                        resultMap.put(key, HtmlUtils.htmlEscape(URLDecoder.decode(val.toString(), "UTF-8")));
+                        resultMap.put(key, HtmlUtils.htmlEscape(URLDecoder.decode(val.toString(), UTF_8)));
 
                     }
                 } else {
@@ -200,12 +201,11 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     }
 
-    // TODO
     private String getRequestBody(InputStream stream) {
         String line = "";
         StringBuilder body = new StringBuilder();
         // 读取POST提交的数据内容
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName(UTF_8)));
         try {
             while ((line = reader.readLine()) != null) {
                 body.append(line);

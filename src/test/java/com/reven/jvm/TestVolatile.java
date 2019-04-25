@@ -1,6 +1,6 @@
 package com.reven.jvm;
 
-public class VolatileTest extends Thread {
+public class TestVolatile extends Thread {
     public volatile static int count;
 
     private static void addCount() {
@@ -16,9 +16,9 @@ public class VolatileTest extends Thread {
     }
 
     public static void main(String[] args) {
-        VolatileTest[] mythreadArray = new VolatileTest[100];
+        TestVolatile[] mythreadArray = new TestVolatile[100];
         for (int i = 0; i < 100; i++) {
-            mythreadArray[i] = new VolatileTest();
+            mythreadArray[i] = new TestVolatile();
         }
 
         for (int i = 0; i < 100; i++) {

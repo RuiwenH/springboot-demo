@@ -22,31 +22,30 @@ public class TestXssController extends BaseController {
 
     @RequestMapping("/test1")
     public ResResult test1(String p1, String p2) {
-        logger.info("p1=" + p1);
-        logger.info("p2=" + p2);
-        return ResResult.success();
-    }
-    
-    @GetMapping("/excludeUrl")
-    public ResResult excludeUrl(String p1, String p2) {
-        logger.info("p1=" + p1);
-        logger.info("p1=" + HtmlUtils.htmlEscape(p1));
-        logger.info("p2=" + p2);
-        logger.info("p1=" + HtmlUtils.htmlEscape(p2));
+        logger.info("p1={}", p1);
+        logger.info("p2={}", p2);
         return ResResult.success();
     }
 
-    
+    @GetMapping("/excludeUrl")
+    public ResResult excludeUrl(String p1, String p2) {
+        logger.info("p1={}", p1);
+        logger.info("p1={}", HtmlUtils.htmlEscape(p1));
+        logger.info("p2={}", p2);
+        logger.info("p1={}", HtmlUtils.htmlEscape(p2));
+        return ResResult.success();
+    }
+
     @GetMapping("/testExcludePar")
     public ResResult testExcludePar(String content, String p2WithHtml) {
-        logger.info("content=" + content);
-        logger.info("p2WithHtml=" + p2WithHtml);
+        logger.info("content={}", content);
+        logger.info("p2WithHtml={}", p2WithHtml);
         return ResResult.success();
     }
 
     @PostMapping("/testBody")
     public ResResult testBody(String body) {
-        logger.info("body=" + body);
+        logger.info("body={}", body);
         return ResResult.success();
     }
 }

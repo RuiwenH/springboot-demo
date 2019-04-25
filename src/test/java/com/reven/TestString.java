@@ -1,6 +1,6 @@
 package com.reven;
 
-public class StringTest {
+public class TestString {
     public static void main(String[] args) {
         StringBuffer sb = new StringBuffer();
         sb.append("ssss");

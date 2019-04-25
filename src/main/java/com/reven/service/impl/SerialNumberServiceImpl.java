@@ -111,7 +111,7 @@ public class SerialNumberServiceImpl extends AbstractService<SerialNumber> imple
             // 更新数据，重置currentSerial为1
             // 。。。
         }
-        StringBuffer serialNum = new StringBuffer();
+        StringBuilder serialNum = new StringBuilder();
         if (!StringUtils.isEmpty(rule.getPrefix())) {
             serialNum = serialNum.append(rule.getPrefix());
         }
