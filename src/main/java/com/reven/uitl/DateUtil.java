@@ -625,5 +625,4 @@ public class DateUtil {
         ca.set(Calendar.DAY_OF_MONTH, day);
         return ca.getTime();
     }
-
 }
