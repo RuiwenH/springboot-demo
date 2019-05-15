@@ -51,5 +51,4 @@ public class ServiceException extends Exception {
     public void setCode(String code) {
         this.code = code;
     }
-
 }

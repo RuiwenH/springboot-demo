@@ -4,7 +4,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class ServerConfig {
-
     /**   
      * @Fields nodeType : ftp节点名称（系统会配置多个ftp账号）   
      */
