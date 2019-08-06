@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -26,7 +25,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<!-- maven.build.timestamp 默认时间戳格式 -->
-        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+		<maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 	</properties>
 
 	<dependencies>
@@ -89,8 +88,7 @@
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
-		<!-- <dependency> <groupId>org.springframework.session</groupId> <artifactId>spring-session</artifactId> 
-			</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.session</groupId> <artifactId>spring-session</artifactId> </dependency> -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
@@ -200,14 +198,18 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 		</dependency>
-		
-		    <!-- xss过滤组件 -->
-	    <dependency>
-	      <groupId>org.jsoup</groupId>
-	      <artifactId>jsoup</artifactId>
-	      <version>1.11.3</version>
-	    </dependency>
 
+		<!-- xss过滤组件 -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.11.3</version>
+		</dependency>
+		<!-- Email发送功能 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -218,9 +220,9 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-                    <!-- spring-boot:run 中文乱码解决 -->
-                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
-				    <!-- 打包时，将本地引用的jar一起打成jar -->
+					<!-- spring-boot:run 中文乱码解决 -->
+					<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+					<!-- 打包时，将本地引用的jar一起打成jar -->
 					<includeSystemScope>true</includeSystemScope>
 					<outputDirectory>${project.outputDirectory}</outputDirectory>
 				</configuration>
@@ -239,8 +241,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
-				    <!-- 使用缓存 用于修改部分文件，例如增加js的版本 -->
-                    <useCache>true</useCache>
+					<!-- 使用缓存 用于修改部分文件，例如增加js的版本 -->
+					<useCache>true</useCache>
 					<excludes>
 						<!-- 打包时排除指定文件 -->
 						<exclude>config/*</exclude>
@@ -248,13 +250,13 @@
 						<exclude>assembly/**</exclude>
 					</excludes>
 				</configuration>
-				<executions> 
-				    <!-- 在打包之前执行，打包后包含已经执行后的文件 -->
-                    <execution>
-                        <id>prepare-jar</id>
-                        <phase>prepare-package</phase>
-                    </execution>
-                </executions>
+				<executions>
+					<!-- 在打包之前执行，打包后包含已经执行后的文件 -->
+					<execution>
+						<id>prepare-jar</id>
+						<phase>prepare-package</phase>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>
@@ -266,7 +268,7 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-			
+
 			<!-- 指定编译的java版本和编码格式 -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -309,79 +311,79 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<!-- assembly压缩文档 -->
 			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <finalName>assembly</finalName>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>src/main/resources/assembly/assembly.xml</descriptor>
-                            </descriptors>
-                            <outputDirectory>${project.outputDirectory}</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
-                <version>1.5.3</version>
-                <executions>
-                    <!-- 打包前进行替换 -->
-                    <execution>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!-- 自动识别到项目target文件夹 -->
-                    <basedir>${build.directory}</basedir>
-                    <!-- 替换的文件所在目录规则 -->
-                    <includes>
-                        <include>**/*.shtml</include>
-                        <include>**/*.html</include>
-                        <include>**/*.jsp</include>
-                    </includes>
-                    <replacements>
-                        <!-- 替换指定内容 -->
-                        <replacement>
-                            <token>#set var=\"version\" value=\"1.0.0.0\"</token>
-                            <value>#set var=\"version\" value=\"${maven.build.timestamp}\"</value>
-                        </replacement>
-                        <!-- 更改规则，在css/js文件末尾追加?v=时间戳，反斜杠表示字符转义 -->
-                        
-                        <replacement>
-                            <token>\.css\'</token>
-                            <value>.css?version=${maven.build.timestamp}\'</value>
-                        </replacement>
-                        <replacement>
-                            <token>\.css\"</token>
-                            <value>.css?version=${maven.build.timestamp}\"</value>
-                        </replacement>
-                        <replacement>
-                            <token>\.js\'</token>
-                            <value>.js?version=${maven.build.timestamp}\'</value>
-                        </replacement>
-                        <replacement>
-                            <token>\.js\"</token>
-                            <value>.js?version=${maven.build.timestamp}\"</value>
-                        </replacement>
-                    </replacements>
-                </configuration>
-            </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<finalName>assembly</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/resources/assembly/assembly.xml</descriptor>
+							</descriptors>
+							<outputDirectory>${project.outputDirectory}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.3</version>
+				<executions>
+					<!-- 打包前进行替换 -->
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- 自动识别到项目target文件夹 -->
+					<basedir>${build.directory}</basedir>
+					<!-- 替换的文件所在目录规则 -->
+					<includes>
+						<include>**/*.shtml</include>
+						<include>**/*.html</include>
+						<include>**/*.jsp</include>
+					</includes>
+					<replacements>
+						<!-- 替换指定内容 -->
+						<replacement>
+							<token>#set var=\"version\" value=\"1.0.0.0\"</token>
+							<value>#set var=\"version\" value=\"${maven.build.timestamp}\"</value>
+						</replacement>
+						<!-- 更改规则，在css/js文件末尾追加?v=时间戳，反斜杠表示字符转义 -->
+
+						<replacement>
+							<token>\.css\'</token>
+							<value>.css?version=${maven.build.timestamp}\'</value>
+						</replacement>
+						<replacement>
+							<token>\.css\"</token>
+							<value>.css?version=${maven.build.timestamp}\"</value>
+						</replacement>
+						<replacement>
+							<token>\.js\'</token>
+							<value>.js?version=${maven.build.timestamp}\'</value>
+						</replacement>
+						<replacement>
+							<token>\.js\"</token>
+							<value>.js?version=${maven.build.timestamp}\"</value>
+						</replacement>
+					</replacements>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

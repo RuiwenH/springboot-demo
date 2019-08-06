@@ -1,5 +1,6 @@
 package com.reven.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -21,7 +23,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,6 +41,7 @@ import com.reven.uitl.ExcelUtil;
  * @ClassName: DemoController
  * @author reven
  */
+
 @RestController
 @RequestMapping("/demo")
 public class DemoController extends BaseController {
@@ -56,8 +58,8 @@ public class DemoController extends BaseController {
                 list.add(new DemoExcel(1 + i, "张三" + i, new Date(), "zhangsan" + i, true, ((float) 1.3 + i), 1.4 + i,
                         (long) 1.5 + i));
             } else {
-                list.add(new DemoExcel(1 + i, "李四" + i, new Date(), "lisi" + i, false, ((float) 2.3 + i), 28899.8884 + i,
-                        (long) 2.0005 + i));
+                list.add(new DemoExcel(1 + i, "李四" + i, new Date(), "lisi" + i, false, ((float) 2.3 + i),
+                        28899.8884 + i, (long) 2.0005 + i));
             }
         }
         LinkedHashMap<String, String> filedMap = new LinkedHashMap<String, String>();
@@ -73,7 +75,8 @@ public class DemoController extends BaseController {
     }
 
     @RequestMapping(value = "/importExcel")
-    public ResResult importExcel(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
+    public ResResult importExcel(@RequestParam("file") MultipartFile file, HttpServletRequest request)
+            throws Exception {
         LinkedHashMap<String, String> filedMap = new LinkedHashMap<String, String>();
         filedMap.put("id", "ID");
         filedMap.put("name", "姓名");
@@ -82,7 +85,8 @@ public class DemoController extends BaseController {
         filedMap.put("numFloat", "float");
         filedMap.put("numDouble", "double");
         filedMap.put("numLong", "long");
-        List<DemoExcel> list = ExcelUtil.excelToList(file.getOriginalFilename(),file.getInputStream(), 0, 0, DemoExcel.class, filedMap);
+        List<DemoExcel> list = ExcelUtil.excelToList(file.getOriginalFilename(), file.getInputStream(), 0, 0,
+                DemoExcel.class, filedMap);
         for (DemoExcel demoExcel : list) {
             System.out.println(demoExcel.toString());
         }
@@ -111,6 +115,19 @@ public class DemoController extends BaseController {
     public ResResult testException2(Date date) {
         System.out.println(date);
         return ResResult.success(date);
+    }
+
+    @PostMapping("/encode/submit")
+    public ResResult encodeSubmit(String userName, String password) throws UnsupportedEncodingException {
+        logger.info(userName);
+        logger.info(password);
+        byte[] userNameByte = Base64.decodeBase64(userName.getBytes("UTF-8"));
+        byte[] passwordByte = Base64.decodeBase64(userName.getBytes("UTF-8"));
+        userName = new String(userNameByte);// 获得解密后的用户名
+        password = new String(passwordByte);
+        logger.info(userName);
+        logger.info(password);
+        return ResResult.success(userName);
     }
 
     @InitBinder

@@ -76,6 +76,12 @@ xss.url.excludes: /favicon.ico,/images/*,/img/*,/js/*,/css/*,/page/*,/style/*,/x
 xss.isclean: 'false'
 
 
+spring.mail.host: smtp.qq.com  
+spring.mail.username: 515583770@qq.com  #发送方的邮箱
+spring.mail.password: ngaznqxrbcegbjai  # 对于qq邮箱而言 密码指的就是发送方的授权码 yxfxmgcnqedscahh
+spring.mail.properties.mail.smtp.auth: true  
+spring.mail.properties.mail.smtp.starttls.enable: true  
+spring.mail.properties.mail.smtp.starttls.required: true
 
 
 

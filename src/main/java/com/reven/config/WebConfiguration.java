@@ -46,7 +46,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         filterRegistrationBean.setFilter(new XssFilter());
         filterRegistrationBean.setOrder(2);
         filterRegistrationBean.setEnabled(xssOn);
-        filterRegistrationBean.addUrlPatterns("/*");
+        filterRegistrationBean.addUrlPatterns("/xss/*");
         Map<String, String> initParameters = Maps.newHashMap();
         initParameters.put("excludes", xssUrlExcludes);
         // TODO excludeParameter未实现

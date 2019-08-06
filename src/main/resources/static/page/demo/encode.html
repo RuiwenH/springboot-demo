@@ -1,0 +1,63 @@
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>测试JS前台加密</title>
+<script type="text/javascript" src="/static/js/common/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/static/js/common/jquery.base64.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#btn").click(function() {
+			//var username = encodeBase64($("#username").val()); //对数据加密  
+			//var password = encodeBase64($("#password").val());
+			$.base64.utf8encode = true;    
+			var username = $.base64.btoa($("#username").val()); //对数据加密  
+            var password = $.base64.btoa($("#password").val());
+			$.ajax({
+	            type: "post",
+	            data: { 'userName': username,'password': password},
+	            url: "/demo/encode/submit",
+	            dataType: "json",
+	            success: function (result) {
+	                alert(result.message);
+	            },
+	            error: function (errorMsg) {
+	                alert(errorMsg);
+	            }
+	        });
+		});
+	});
+
+	//加密方法。没有过滤首尾空格，即没有trim.    
+	//加密可以加密N次，对应解密N次就可以获取明文    
+	 function encodeBase64(mingwen,times){    
+		alert(mingwen);
+	    var code="";    
+	    var num=1;    
+	    if(typeof times=='undefined'||times==null||times==""){    
+	       num=1;    
+	    }else{    
+	       var vt=times+"";    
+	       num=parseInt(vt);    
+	    }    
+	    if(typeof mingwen=='undefined'||mingwen==null||mingwen==""){    
+	    }else{    
+	        $.base64.utf8encode = true;    
+	        code=mingwen;    
+	        for(var i=0;i<num;i++){    
+	           code=$.base64.btoa(code);    
+	        }    
+	    }    
+	    return code;    
+	};
+</script>
+</head>
+<body>
+    <br /> 测试敏感信息进行加密,不能以明文暴露到浏览器。
+	<br /> /encode/submit:post
+	<form id="testForm" method="post">
+		<input id="username" value="刘德华">
+		<input id="password" value="123456">
+		<button type="button"  id="btn">submit</button>
+	</form>
+</body>
+</html>

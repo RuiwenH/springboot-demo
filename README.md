@@ -15,7 +15,7 @@ SpringBoot 常用功能演示及使用规范，最佳实践。
 * springBoot的监控和管理
 * xss实践
 * sql注入
-*
+* 邮件发送（纯文本、html、图片、附件）
 * logback不同业务的日志打印到不同文件
 
 ## 目录结构规范
@@ -138,6 +138,11 @@ https://blog.csdn.net/zhaoyahui_666/article/details/78835128
 * sql编写使用预编译的方式。在无法避免使用预编译的地方（order by 、动态表名等），使用sql注入字符串过滤工具类过滤参数
 * 工具类：SqlInjectionUtil.java
 * 测试入口：SqlInjectionController.java
+
+## 邮件发送（纯文本、html、图片、附件）
+* 参考文档 https://www.cnblogs.com/muliu/p/6017622.html
+* 参考文档 https://www.cnblogs.com/ysocean/p/7666061.html
+* 参考文档 https://blog.csdn.net/sinat_26342009/article/details/89425836
 
 ## CSRF攻击
 
