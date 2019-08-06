@@ -198,12 +198,18 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 		</dependency>
-
-		<!-- xss过滤组件 -->
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.11.3</version>
+		    <!-- xss过滤组件 -->
+	    <dependency>
+	      <groupId>org.jsoup</groupId>
+	      <artifactId>jsoup</artifactId>
+	      <version>1.11.3</version>
+	    </dependency>
+	    
+	    <!-- sftp -->
+	    <dependency>
+		    <groupId>com.jcraft</groupId>
+		    <artifactId>jsch</artifactId>
+		    <version>0.1.55</version>
 		</dependency>
 		<!-- Email发送功能 -->
 		<dependency>

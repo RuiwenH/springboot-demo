@@ -2,7 +2,7 @@ package com.reven.core;
 
 /**
  * @ClassName:  ServiceException   
- * @Description:服务（业务）异常，controller 返回异步请求数据建议处理本异常
+ * @Description:服务（业务）异常，controller 返回异步请求数据时建议处理本异常
  * @author reven
  * @date   2018年8月28日
  */
@@ -51,5 +51,4 @@ public class ServiceException extends Exception {
     public void setCode(String code) {
         this.code = code;
     }
-
 }
