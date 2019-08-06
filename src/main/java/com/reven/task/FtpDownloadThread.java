@@ -13,7 +13,7 @@ import com.reven.uitl.ftp.ServerConfig;
 /**
  * @author reven
  */
-@Component
+//@Component
 public class FtpDownloadThread implements Runnable {
     private static Logger logger = LoggerFactory.getLogger(FtpDownloadThread.class);
     private String threadName;
